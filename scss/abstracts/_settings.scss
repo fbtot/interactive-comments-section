@@ -1,0 +1,28 @@
+$base-font-size: 16px;
+$small-font-size: 16px * 0.9;
+$width-700: 800px; // desktop
+$width-500: 600px; // tablet
+$width-300: 450px; // mobile
+$desktop-width: $width-700;
+$mobile-width: $desktop-width - 1px;
+
+:root {
+  // Colors
+  --text-color: hsl(0, 0%, 7%);
+  --accent-color: hsl(216, 61%, 54%);
+  --grey300: hsl(0, 0%, 70%);
+  --grey500: hsl(0, 0%, 50%);
+
+  // Typography
+  --base-font-size: #{$base-font-size};
+  --small-font-size: #{$small-font-size};
+  --line-height: 1.6em;
+  --body-font-family: "Open Sans", sans-serif;
+  --headings-font-family: "Raleway", sans-serif;
+  --h1-font-size: 2.7rem;
+  --h2-font-size: 2rem;
+  --h3-font-size: 1.5rem;
+  --h4-font-size: 1.3rem;
+  --h5-font-size: 1.1rem;
+  --h6-font-size: 1rem;
+}

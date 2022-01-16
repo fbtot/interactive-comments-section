@@ -1,0 +1,216 @@
+@use "sass:color";
+@use "sass:math";
+@use "./settings" as *;
+@use "./utilities" as *;
+
+// ========================== § PIXELS TO REM ===
+@function pxToRem($px, $base-font-size: $base-font-size) {
+  @return math.div($px, $base-font-size) + rem;
+}
+
+// ========================== § MEDIA QUERIES ===
+// Create media queries
+@function minus-one($number, $check) {
+  @if $check == true {
+    @return $number - 1;
+  } @else {
+    @return $number;
+  }
+}
+
+@mixin mq($width1, $width2, $minus-one: true) {
+  @if $width2 == "up" {
+    @media screen and (min-width: $width1) {
+      /* mixin mq */
+      @content;
+      /* end mixin mq */
+    }
+  } @else if $width2 == "down" {
+    @media screen and (max-width: minus-one($width1, $minus-one)) {
+      /* mixin mq */
+      @content;
+      /* end mixin mq */
+    }
+  } @else if $width1 > $width2 {
+    @media screen and (min-width: $width2) and (max-width: minus-one($width1, $minus-one)) {
+      /* mixin mq */
+      @content;
+      /* end mixin mq */
+    }
+  } @else if $width1 < $width2 {
+    @media screen and (min-width: $width1) and (max-width: minus-one($width2, $minus-one)) {
+      /* mixin mq */
+      @content;
+      /* end mixin mq */
+    }
+  }
+}
+
+// ========================== § EXCEPT FIRST ONE ===
+// Apply the value to all the direct children except the first one
+// https://alistapart.com/article/axiomatic-css-and-lobotomized-owls/
+@mixin except-first-one($prop: "", $value: "") {
+  @if $prop != "" {
+    > * + * {
+      /*@mixin except-first-one*/
+      #{$prop}: $value;
+    }
+  } @else {
+    > * + * {
+      /*@mixin except-first-one*/
+      @content;
+      /*end @mixin except-first-one*/
+    }
+  }
+}
+
+// ========================== § CENTER ===
+// Center an element in many different ways: flex, grid, translate, margin
+@mixin center($method: "") {
+  /* @mixin center */
+  @if $method == "flex" {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  } @else if $method == "grid" {
+    display: grid;
+    justify-items: center;
+    align-items: center;
+  } @else if $method == "translate" {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  } @else if $method == "" OR $method == "margin" {
+    margin-left: auto;
+    margin-right: auto;
+  }
+  /* end @mixin center */
+}
+
+// ========================== § POSITION ===
+// Set the position of an element.
+@mixin position($position, $top: null, $right: null, $bottom: null, $left: null) {
+  /* @mixin position */
+  position: $position;
+  @if $top != null {
+    top: $top;
+  }
+  @if $right != null {
+    right: $right;
+  }
+  @if $bottom != null {
+    bottom: $bottom;
+  }
+  @if $left != null {
+    left: $left;
+  }
+  /* end @mixin position */
+}
+
+// ========================== § MAKE A SQUARE ===
+@mixin square($size) {
+  /* @mixin size */
+  width: $size;
+  height: $size;
+  /* end @mixin size */
+}
+
+// ========================== § MAKE A CIRCLE ===
+@mixin circle($diameter: null) {
+  /* @mixin circle */
+  border-radius: 1000px;
+  @if ($diameter != null) {
+    width: $diameter;
+    height: $diameter;
+  }
+  /* end @mixin circle */
+}
+
+// ========================== § MAKE A SQUARE ===
+@mixin square($width: null) {
+  /* @mixin square */
+  width: $width;
+  height: $width;
+  /* end @mixin square */
+}
+
+// ========================== § ANTIALIAS ===
+// Antialias for webkit and firefox
+@mixin antialias() {
+  /* @mixin antialias */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* end @mixin antialias */
+}
+
+// ========================== § DEBUG ===
+// Highlight the current element and all its children
+@mixin debug($color: red) {
+  // @mixin debug
+  background-color: rgba($color, 0.1) !important;
+  outline: 1px solid rgb($color, 0.3) !important;
+
+  &:hover {
+    outline: 4px solid rgb($color, 0.8) !important;
+  }
+
+  * {
+    background-color: rgba($color, 0.1) !important;
+    outline: 1px solid rgb($color, 0.3) !important;
+
+    &:hover {
+      outline: 4px solid rgb($color, 0.8) !important;
+    }
+  }
+  // end @mixin debug
+}
+
+// ========================== § COLUMN START-END ===
+@mixin column-start-end($start, $end) {
+  // @mixin column-start-end
+  grid-column-start: $start;
+  grid-column-end: $end;
+  // end @mixin column-start-end
+}
+
+// ========================== § ROW START-END ===
+@mixin row-start-end($start, $end) {
+  // @mixin row-start-end
+  grid-row-start: $start;
+  grid-row-end: $end;
+  // end @mixin row-start-end
+}
+/* ========================== § PROGRESS BAR COLORS === */
+// Change colors to progress bar
+
+@mixin progress-bar-colors($background: chocolate, $bar: bisque) {
+  /* @mixin progress-bar-colors */
+  background-color: $background;
+  -webkit-appearance: none;
+
+  &::-webkit-progress-bar {
+    background-color: $background;
+  }
+  &::-webkit-progress-value {
+    background-color: $bar;
+  }
+  &::-moz-progress-bar {
+    background-color: $bar;
+  }
+  /* end @mixin progress-bar-colors */
+}
+
+/* ========================== § REMOVE ARROWS === */
+// Remove arrows from input[type="number"]
+
+@mixin remove-arrows() {
+  /* @mixin remove-arrows */
+  -moz-appearance: textfield;
+
+  &::-webkit-outer-spin-button,
+  &::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+  }
+  /* end @mixin remove-arrows */
+}

@@ -1,0 +1,138 @@
+@use "../index.scss" as *;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: var(--base-font-size);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 100vw;
+  min-height: 100vh;
+  line-height: 1.6em;
+  font-family: var(--body-font-family);
+  color: var(--text-color);
+  background-color: rgb(238, 238, 238);
+}
+
+/* ========================== § TYPOGRAPHY === */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p {
+  max-width: 60ch;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 1em;
+  margin-bottom: 0.5em;
+}
+
+h1 {
+  font-size: var(--h1-font-size);
+  line-height: 1.2em;
+}
+
+h2 {
+  font-size: var(--h2-font-size);
+  line-height: 1.2em;
+}
+
+h3 {
+  font-size: var(--h3-font-size);
+  line-height: 1.2em;
+}
+
+h4 {
+  font-size: var(--h4-font-size);
+  line-height: 1.2em;
+}
+
+h5 {
+  font-size: var(--h5-font-size);
+}
+
+h6 {
+  font-size: var(--h6-font-size);
+}
+
+a {
+  color: var(--accent-color);
+}
+
+dt {
+  font-weight: bold;
+}
+
+hr {
+  border: none;
+  border-bottom: 1px solid var(--grey300);
+}
+
+/* ========================== § TABLES === */
+table,
+td,
+th {
+  border: 1px solid var(--grey300);
+}
+
+table {
+  border-collapse: collapse;
+}
+
+caption {
+  font-size: var(--h4-font-size);
+  font-weight: bold;
+}
+thead {
+  font-weight: bold;
+  background: var(--grey300);
+
+  th {
+    border-color: var(--grey500);
+  }
+}
+
+td,
+th {
+  padding: 0.5rem;
+}
+/* ========================== § IMAGES === */
+img {
+  max-width: 100%;
+}
+
+figcaption {
+  font-size: var(--small-font-size);
+}
+
+/* ========================== § FORMS === */
+fieldset,
+textarea {
+  border: 1px solid var(--grey300);
+}
+
+textarea,
+input,
+select {
+  border: 1px solid var(--grey300);
+  padding: 0.5rem;
+}
+
+button,
+input[type="submit"] {
+  cursor: pointer;
+}

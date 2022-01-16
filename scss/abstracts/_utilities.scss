@@ -1,0 +1,45 @@
+// ========================== § UTILITIES ===
+%m0a {
+  margin: 0 auto;
+}
+
+%reset-list,
+%reset-list li,
+%reset-list ul li,
+%reset-list ol li {
+  margin: 0;
+  padding: 0;
+  text-indent: 0;
+  list-style-type: none;
+}
+
+// https://ismamz.github.io/postcss-utilities/docs
+%hide-visually {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  border: 0;
+}
+
+// https://ismamz.github.io/postcss-utilities/docs
+%reset-text {
+  font-family: sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  letter-spacing: normal;
+  line-break: auto;
+  line-height: 1.5;
+  text-align: left;
+  text-align: start;
+  text-decoration: none;
+  text-shadow: none;
+  text-transform: none;
+  white-space: normal;
+  word-break: normal;
+  word-spacing: normal;
+  word-wrap: normal;
+}
