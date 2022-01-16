@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "live-server --watch=''**/*.html,css/mainDist.css,**/*.js'' & sass -w scss:css & postcss css/main.css -o css/mainDist.css -w"
   },
   "keywords": [],
   "author": "",

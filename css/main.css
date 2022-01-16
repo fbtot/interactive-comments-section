@@ -4,11 +4,19 @@
   --accent-color: hsl(216, 61%, 54%);
   --grey300: hsl(0, 0%, 70%);
   --grey500: hsl(0, 0%, 50%);
+  --moderate-blue: hsl(238, 40%, 52%);
+  --soft-red: hsl(358, 79%, 66%);
+  --light-grayish-blue: hsl(239, 57%, 85%);
+  --pale-red: hsl(357, 100%, 86%);
+  --dark-blue: hsl(212, 24%, 26%);
+  --grayish-blue: hsl(211, 10%, 45%);
+  --light-gray: hsl(223, 19%, 93%);
+  --very-light-grey: hsl(228, 33%, 97%);
   --base-font-size: 16px;
   --small-font-size: 14.4px;
   --line-height: 1.6em;
-  --body-font-family: "Open Sans", sans-serif;
-  --headings-font-family: "Raleway", sans-serif;
+  --body-font-family: "Rubik", sans-serif;
+  --headings-font-family: var(--body-font-family);
   --h1-font-size: 2.7rem;
   --h2-font-size: 2rem;
   --h3-font-size: 1.5rem;
@@ -17,6 +25,8 @@
   --h6-font-size: 1rem;
 }
 
+/* ========================== § PROGRESS BAR COLORS === */
+/* ========================== § REMOVE ARROWS === */
 * {
   margin: 0;
   padding: 0;
