@@ -192,7 +192,7 @@ textarea {
 }
 
 .basic-button, .blue-button {
-  padding: 0.8rem;
+  padding: 1rem 2rem;
   border-radius: var(--border-radius);
   border: none;
   text-transform: uppercase;
