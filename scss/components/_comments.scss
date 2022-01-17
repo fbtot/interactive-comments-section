@@ -60,7 +60,7 @@
   grid-gap: 1rem;
 
   @include mq($desktop-width, up) {
-    grid-template-columns: 2rem auto auto;
+    grid-template-columns: 2.5rem auto max-content;
     grid-template-areas: "avatar text button";
   }
 }
@@ -75,6 +75,7 @@
 
 .reply__button-container {
   grid-area: button;
+  text-align: right;
 }
 
 /* ============================================ */

@@ -267,7 +267,7 @@ textarea {
 @media screen and (min-width: 800px) {
   .reply {
     /* mixin mq */
-    grid-template-columns: 2rem auto auto;
+    grid-template-columns: 2.5rem auto max-content;
     grid-template-areas: "avatar text button";
     /* end mixin mq */
   }
@@ -283,6 +283,7 @@ textarea {
 
 .reply__button-container {
   grid-area: button;
+  text-align: right;
 }
 
 /* ============================================ */
