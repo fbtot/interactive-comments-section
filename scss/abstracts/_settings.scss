@@ -19,7 +19,7 @@ $mobile-width: $desktop-width - 1px;
   --light-gray: hsl(223, 19%, 93%);
   --very-light-grey: hsl(228, 33%, 97%);
 
-  --text-color: hsl(0, 0%, 7%);
+  --text-color: var(--grayish-blue);
   --accent-color: var(--moderate-blue);
   --grey300: hsl(0, 0%, 70%);
   --grey500: hsl(0, 0%, 50%);

@@ -1,7 +1,11 @@
 @use "../index.scss" as *;
+/* ============================================ */
+/* ··········································· § COMMENTS LAYOUT ··· */
+/* ======================================== */
 
 .comment-container {
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   grid-template-areas:

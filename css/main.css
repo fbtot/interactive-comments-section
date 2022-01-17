@@ -8,7 +8,7 @@
   --grayish-blue: hsl(211, 10%, 45%);
   --light-gray: hsl(223, 19%, 93%);
   --very-light-grey: hsl(228, 33%, 97%);
-  --text-color: hsl(0, 0%, 7%);
+  --text-color: var(--grayish-blue);
   --accent-color: var(--moderate-blue);
   --grey300: hsl(0, 0%, 70%);
   --grey500: hsl(0, 0%, 50%);
@@ -199,8 +199,12 @@ textarea {
   background: var(--light-grayish-blue);
 }
 
+/* ============================================ */
+/* ··········································· § COMMENTS LAYOUT ··· */
+/* ======================================== */
 .comment-container {
   display: grid;
+  grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: auto auto auto;
   grid-template-areas: "header header header header" "comment comment comment comment" "points points action action";
