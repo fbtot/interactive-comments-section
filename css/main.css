@@ -45,7 +45,7 @@ body {
   line-height: 1.5em;
   font-family: var(--body-font-family);
   color: var(--text-color);
-  background-color: var(--light-gray);
+  background-color: var(--very-light-grey);
 }
 
 /* ========================== § TYPOGRAPHY === */
@@ -171,9 +171,9 @@ input[type=submit] {
 }
 
 .basic-container, textarea {
-  background: white;
   border-radius: var(--border-radius);
   padding: 1rem;
+  background: white;
 }
 @media screen and (min-width: 800px) {
   .basic-container, textarea {
@@ -294,7 +294,7 @@ textarea {
 
 .counter {
   display: flex;
-  background: var(--light-gray);
+  background: var(--very-light-grey);
   border-radius: var(--border-radius);
   padding: 0.5rem;
 }

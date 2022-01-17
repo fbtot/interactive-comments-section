@@ -1,9 +1,9 @@
 @use "../index.scss" as *;
 
 .basic-container {
-  background: white;
   border-radius: var(--border-radius);
   padding: 1rem;
+  background: white;
 
   @include mq($desktop-width, up) {
     padding: 1.5rem;
