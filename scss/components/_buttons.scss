@@ -1,1 +1,18 @@
 @use "../index" as *;
+
+.basic-button {
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: none;
+  text-transform: uppercase;
+}
+
+.blue-button {
+  @extend .basic-button;
+  background: var(--moderate-blue);
+  color: white;
+
+  &:hover {
+    background: var(--light-grayish-blue);
+  }
+}

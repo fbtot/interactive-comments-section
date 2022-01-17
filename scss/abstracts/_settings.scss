@@ -8,10 +8,6 @@ $mobile-width: $desktop-width - 1px;
 
 :root {
   // Colors
-  --text-color: hsl(0, 0%, 7%);
-  --accent-color: hsl(216, 61%, 54%);
-  --grey300: hsl(0, 0%, 70%);
-  --grey500: hsl(0, 0%, 50%);
 
   --moderate-blue: hsl(238, 40%, 52%);
   --soft-red: hsl(358, 79%, 66%);
@@ -23,6 +19,10 @@ $mobile-width: $desktop-width - 1px;
   --light-gray: hsl(223, 19%, 93%);
   --very-light-grey: hsl(228, 33%, 97%);
 
+  --text-color: hsl(0, 0%, 7%);
+  --accent-color: var(--moderate-blue);
+  --grey300: hsl(0, 0%, 70%);
+  --grey500: hsl(0, 0%, 50%);
   // Typography
   --base-font-size: #{$base-font-size};
   --small-font-size: #{$small-font-size};
@@ -35,4 +35,6 @@ $mobile-width: $desktop-width - 1px;
   --h4-font-size: 1.3rem;
   --h5-font-size: 1.1rem;
   --h6-font-size: 1rem;
+
+  --border-radius: 0.5rem;
 }

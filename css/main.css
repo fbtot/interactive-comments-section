@@ -1,9 +1,5 @@
 @charset "UTF-8";
 :root {
-  --text-color: hsl(0, 0%, 7%);
-  --accent-color: hsl(216, 61%, 54%);
-  --grey300: hsl(0, 0%, 70%);
-  --grey500: hsl(0, 0%, 50%);
   --moderate-blue: hsl(238, 40%, 52%);
   --soft-red: hsl(358, 79%, 66%);
   --light-grayish-blue: hsl(239, 57%, 85%);
@@ -12,6 +8,10 @@
   --grayish-blue: hsl(211, 10%, 45%);
   --light-gray: hsl(223, 19%, 93%);
   --very-light-grey: hsl(228, 33%, 97%);
+  --text-color: hsl(0, 0%, 7%);
+  --accent-color: var(--moderate-blue);
+  --grey300: hsl(0, 0%, 70%);
+  --grey500: hsl(0, 0%, 50%);
   --base-font-size: 16px;
   --small-font-size: 14.4px;
   --line-height: 1.6em;
@@ -23,6 +23,7 @@
   --h4-font-size: 1.3rem;
   --h5-font-size: 1.1rem;
   --h6-font-size: 1rem;
+  --border-radius: 0.5rem;
 }
 
 /* ========================== § PROGRESS BAR COLORS === */
@@ -44,7 +45,7 @@ body {
   line-height: 1.6em;
   font-family: var(--body-font-family);
   color: var(--text-color);
-  background-color: #eeeeee;
+  background-color: var(--light-gray);
 }
 
 /* ========================== § TYPOGRAPHY === */
@@ -98,6 +99,10 @@ h6 {
 
 a {
   color: var(--accent-color);
+  text-decoration: none;
+}
+a:hover {
+  color: var(--light-grayish-blue);
 }
 
 dt {
@@ -163,6 +168,21 @@ select {
 button,
 input[type=submit] {
   cursor: pointer;
+}
+
+.basic-button, .blue-button {
+  padding: 0.8rem;
+  border-radius: var(--border-radius);
+  border: none;
+  text-transform: uppercase;
+}
+
+.blue-button {
+  background: var(--moderate-blue);
+  color: white;
+}
+.blue-button:hover {
+  background: var(--light-grayish-blue);
 }
 
 /*# sourceMappingURL=main.css.map */
