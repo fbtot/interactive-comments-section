@@ -1,0 +1,36 @@
+@use "../index.scss" as *;
+
+.counter {
+  display: flex;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+
+  @include mq($desktop-width, down) {
+    width: 6.2rem;
+    align-items: center;
+    justify-content: space-around;
+  }
+
+  @include mq($desktop-width, up) {
+    flex-direction: column;
+    text-align: center;
+    align-items: stretch;
+  }
+}
+
+.counter__count {
+  color: var(--moderate-blue);
+  @include mq($desktop-width, up) {
+    margin: 0.4rem 0;
+  }
+}
+
+.counter__plus,
+.counter__minus {
+  color: var(--light-grayish-blue);
+
+  &:hover {
+    color: var(--moderate-blue);
+  }
+}

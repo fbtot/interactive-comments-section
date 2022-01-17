@@ -255,4 +255,49 @@ textarea {
   color: var(--dark-blue);
 }
 
+.counter {
+  display: flex;
+  background: var(--light-gray);
+  border-radius: var(--border-radius);
+  padding: 0.5rem;
+}
+@media screen and (max-width: 799px) {
+  .counter {
+    /* mixin mq */
+    width: 6.2rem;
+    align-items: center;
+    justify-content: space-around;
+    /* end mixin mq */
+  }
+}
+@media screen and (min-width: 800px) {
+  .counter {
+    /* mixin mq */
+    flex-direction: column;
+    text-align: center;
+    align-items: stretch;
+    /* end mixin mq */
+  }
+}
+
+.counter__count {
+  color: var(--moderate-blue);
+}
+@media screen and (min-width: 800px) {
+  .counter__count {
+    /* mixin mq */
+    margin: 0.4rem 0;
+    /* end mixin mq */
+  }
+}
+
+.counter__plus,
+.counter__minus {
+  color: var(--light-grayish-blue);
+}
+.counter__plus:hover,
+.counter__minus:hover {
+  color: var(--moderate-blue);
+}
+
 /*# sourceMappingURL=main.css.map */
