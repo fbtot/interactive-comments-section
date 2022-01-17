@@ -264,8 +264,12 @@ textarea {
 
 .comment__action {
   display: flex;
+  justify-content: flex-end;
   align-items: center;
   font-weight: 700;
+}
+.comment__action > * + * {
+  margin-left: 1rem;
 }
 
 .comment__delete {
