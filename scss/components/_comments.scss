@@ -7,15 +7,14 @@
   display: grid;
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: auto auto auto;
   grid-template-areas:
     "header header header header"
     "comment comment comment comment"
     "points points action action";
 
   @include mq($desktop-width, up) {
-    grid-template-columns: 3em auto auto;
-    grid-template-rows: auto auto;
+    grid-template-columns: 2.5em auto auto;
+    grid-template-rows: auto;
     grid-template-areas:
       "points header action"
       "points comment comment";
@@ -30,7 +29,7 @@
   grid-area: comment;
 }
 
-.comment__points {
+.counter-container {
   grid-area: points;
 }
 
