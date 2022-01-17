@@ -51,6 +51,32 @@
   grid-area: action;
 }
 
+.reply {
+  display: grid;
+  grid-template-columns: 2rem auto;
+  grid-template-areas:
+    "text text"
+    "avatar button";
+  grid-gap: 1rem;
+
+  @include mq($desktop-width, up) {
+    grid-template-columns: 2rem auto auto;
+    grid-template-areas: "avatar text button";
+  }
+}
+
+.reply__text {
+  grid-area: text;
+}
+
+.reply__avatar {
+  grid-area: avatar;
+}
+
+.reply__button-container {
+  grid-area: button;
+}
+
 /* ============================================ */
 /* ··········································· § STYLES ··· */
 /* ======================================== */
