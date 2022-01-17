@@ -235,4 +235,24 @@ textarea {
   grid-area: action;
 }
 
+/* ============================================ */
+/* ··········································· § STYLES ··· */
+/* ======================================== */
+.comment__meta {
+  display: flex;
+  align-items: center;
+}
+.comment__meta * + * {
+  margin-left: 1rem;
+}
+
+.comment__avatar {
+  width: 2rem;
+  height: 2rem;
+}
+
+.comment__author {
+  color: var(--dark-blue);
+}
+
 /*# sourceMappingURL=main.css.map */
