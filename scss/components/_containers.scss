@@ -1,0 +1,11 @@
+@use "../index.scss" as *;
+
+.basic-container {
+  background: white;
+  border-radius: var(--border-radius);
+  padding: 1rem;
+}
+
+.comments-container {
+  padding: 1rem;
+}
