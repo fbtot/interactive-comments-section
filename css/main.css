@@ -170,7 +170,7 @@ input[type=submit] {
   cursor: pointer;
 }
 
-.basic-container {
+.basic-container, textarea {
   background: white;
   border-radius: var(--border-radius);
   padding: 1rem;
@@ -178,6 +178,10 @@ input[type=submit] {
 
 .comments-container {
   padding: 1rem;
+}
+
+textarea {
+  border: 2px solid var(--light-gray);
 }
 
 .basic-button, .blue-button {

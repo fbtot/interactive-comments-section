@@ -1,1 +1,7 @@
 @use "../index" as *;
+@use "../components/containers";
+
+textarea {
+  @extend .basic-container;
+  border: 2px solid var(--light-gray);
+}
