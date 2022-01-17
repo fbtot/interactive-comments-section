@@ -42,7 +42,7 @@ html {
 body {
   min-width: 100vw;
   min-height: 100vh;
-  line-height: 1.6em;
+  line-height: 1.5em;
   font-family: var(--body-font-family);
   color: var(--text-color);
   background-color: var(--light-gray);
