@@ -214,6 +214,7 @@ textarea {
   grid-gap: 1rem;
   grid-template-columns: 1fr 1fr;
   grid-template-areas: "header header header header" "comment comment comment comment" "points points action action";
+  margin-bottom: 1rem;
 }
 @media screen and (min-width: 800px) {
   .comment-container {
@@ -222,6 +223,21 @@ textarea {
     grid-template-rows: auto;
     grid-template-areas: "points header action" "points comment comment";
     grid-gap: 1.5rem;
+    margin-bottom: 1.5rem;
+    /* end mixin mq */
+  }
+}
+
+.replies-container {
+  margin-left: 1rem;
+  padding-left: 1rem;
+  border-left: 2px solid var(--light-gray);
+}
+@media screen and (min-width: 800px) {
+  .replies-container {
+    /* mixin mq */
+    margin-left: 2.7rem;
+    padding-left: 2.7rem;
     /* end mixin mq */
   }
 }
