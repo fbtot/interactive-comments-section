@@ -262,6 +262,16 @@ textarea {
   color: var(--dark-blue);
 }
 
+.comment__action {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.comment__delete {
+  color: var(--soft-red);
+}
+
 .counter {
   display: flex;
   background: var(--light-gray);
@@ -305,6 +315,10 @@ textarea {
 .counter__plus:hover,
 .counter__minus:hover {
   color: var(--moderate-blue);
+}
+
+.icon-text__icon {
+  margin-right: 0.3rem;
 }
 
 /*# sourceMappingURL=main.css.map */

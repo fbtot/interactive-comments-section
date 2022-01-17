@@ -58,3 +58,13 @@
 .comment__author {
   color: var(--dark-blue);
 }
+
+.comment__action {
+  display: flex;
+  align-items: center;
+  font-weight: 700;
+}
+
+.comment__delete {
+  color: var(--soft-red);
+}
