@@ -4,6 +4,10 @@
   background: white;
   border-radius: var(--border-radius);
   padding: 1rem;
+
+  @include mq($desktop-width, up) {
+    padding: 1.5rem;
+  }
 }
 
 .comments-container {
