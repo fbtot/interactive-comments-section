@@ -1,0 +1,13 @@
+@use "../index.scss" as *;
+
+.tag {
+  font-size: var(--small-font-size);
+  padding: 0 0.5rem;
+  border-radius: 3px;
+  background: var(--grey300);
+}
+
+.tag--blue {
+  background: var(--moderate-blue);
+  color: white;
+}

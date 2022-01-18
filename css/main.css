@@ -13,7 +13,7 @@
   --grey300: hsl(0, 0%, 70%);
   --grey500: hsl(0, 0%, 50%);
   --base-font-size: 16px;
-  --small-font-size: 14.4px;
+  --small-font-size: 13.6px;
   --line-height: 1.6em;
   --body-font-family: "Rubik", sans-serif;
   --headings-font-family: var(--body-font-family);
@@ -370,6 +370,18 @@ textarea {
 
 .icon-text__icon {
   margin-right: 0.3rem;
+}
+
+.tag {
+  font-size: var(--small-font-size);
+  padding: 0 0.5rem;
+  border-radius: 3px;
+  background: var(--grey300);
+}
+
+.tag--blue {
+  background: var(--moderate-blue);
+  color: white;
 }
 
 /*# sourceMappingURL=main.css.map */
