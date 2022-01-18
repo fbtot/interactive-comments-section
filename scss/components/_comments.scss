@@ -28,6 +28,15 @@
     grid-gap: 1.5rem;
   }
 
+  @include mq($small-size, down) {
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "header"
+      "comment"
+      "action"
+      "points";
+  }
+
   &.edit-comment {
     grid-template-areas:
       "header header header header"
@@ -75,14 +84,25 @@
 .comment__action {
   grid-area: action;
   display: flex;
+  flex-wrap: wrap;
 
   > * {
     margin-left: auto;
     display: inline-flex;
+
+    @include mq($small-size, down) {
+      // flex: 1 0 100%;
+      // align-self: flex-end;
+    }
   }
 }
 .comment__edit-buttons {
   grid-area: editBtns;
+}
+
+.comment__counter-container {
+  display: block;
+  align-self: end;
 }
 
 .reply {
@@ -120,13 +140,22 @@
 .reply__text {
   resize: none;
   min-height: 10rem;
+
+  @include mq($small-size, down) {
+    min-height: 25rem;
+  }
 }
 .comment__meta {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
 
-  * + * {
-    margin-left: 1rem;
+.comment__date {
+  @include mq($small-size, down) {
+    width: 100%;
+    display: block;
   }
 }
 
@@ -173,9 +202,13 @@
 .comment__edit-buttons {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
 
-  > * + * {
-    margin-left: 1rem;
+  @include mq($small-size, down) {
+    > * {
+      flex: 1 0 100%;
+    }
   }
 }
 

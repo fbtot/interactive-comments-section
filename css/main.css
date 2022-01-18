@@ -258,6 +258,14 @@ textarea {
     /* end mixin mq */
   }
 }
+@media screen and (max-width: 378px) {
+  .comment-container {
+    /* mixin mq */
+    grid-template-columns: 1fr;
+    grid-template-areas: "header" "comment" "action" "points";
+    /* end mixin mq */
+  }
+}
 .comment-container.edit-comment {
   grid-template-areas: "header header header header" "comment comment comment comment" "editBtns editBtns editBtns editBtns" "points points action action";
 }
@@ -303,14 +311,26 @@ textarea {
 .comment__action {
   grid-area: action;
   display: flex;
+  flex-wrap: wrap;
 }
 .comment__action > * {
   margin-left: auto;
   display: inline-flex;
 }
+@media screen and (max-width: 378px) {
+  .comment__action > * {
+    /* mixin mq */
+    /* end mixin mq */
+  }
+}
 
 .comment__edit-buttons {
   grid-area: editBtns;
+}
+
+.comment__counter-container {
+  display: block;
+  align-self: end;
 }
 
 .reply {
@@ -349,13 +369,29 @@ textarea {
   resize: none;
   min-height: 10rem;
 }
+@media screen and (max-width: 378px) {
+  .comment__edit-comment,
+.reply__text {
+    /* mixin mq */
+    min-height: 25rem;
+    /* end mixin mq */
+  }
+}
 
 .comment__meta {
   display: flex;
   align-items: center;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
 }
-.comment__meta * + * {
-  margin-left: 1rem;
+
+@media screen and (max-width: 378px) {
+  .comment__date {
+    /* mixin mq */
+    width: 100%;
+    display: block;
+    /* end mixin mq */
+  }
 }
 
 .comment__avatar {
@@ -400,9 +436,17 @@ textarea {
 .comment__edit-buttons {
   display: flex;
   justify-content: flex-end;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
 }
-.comment__edit-buttons > * + * {
-  margin-left: 1rem;
+@media screen and (max-width: 378px) {
+  .comment__edit-buttons {
+    /* mixin mq */
+    /* end mixin mq */
+  }
+  .comment__edit-buttons > * {
+    flex: 1 0 100%;
+  }
 }
 
 /* ============================================ */
