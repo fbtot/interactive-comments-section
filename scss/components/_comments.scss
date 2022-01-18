@@ -127,6 +127,10 @@
 
 .comment__delete {
   color: var(--soft-red);
+
+  &:hover {
+    color: var(--pale-red);
+  }
 }
 
 /* ============================================ */

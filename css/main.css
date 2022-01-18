@@ -339,6 +339,9 @@ textarea {
 .comment__delete {
   color: var(--soft-red);
 }
+.comment__delete:hover {
+  color: var(--pale-red);
+}
 
 /* ============================================ */
 /* ··········································· § VISIBILITY ··· */
