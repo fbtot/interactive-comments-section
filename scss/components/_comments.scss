@@ -2,6 +2,14 @@
 /* ============================================ */
 /* ··········································· § COMMENTS LAYOUT ··· */
 /* ======================================== */
+.comment-container,
+.reply-container {
+  margin-bottom: 1rem;
+
+  @include mq($desktop-width, up) {
+    margin-bottom: 1.5rem;
+  }
+}
 .comment-container {
   display: grid;
   grid-gap: 1rem;
@@ -10,7 +18,6 @@
     "header header header header"
     "comment comment comment comment"
     "points points action action";
-  margin-bottom: 1rem;
 
   @include mq($desktop-width, up) {
     grid-template-columns: 2.5em auto auto;
@@ -19,7 +26,6 @@
       "points header action"
       "points comment comment";
     grid-gap: 1.5rem;
-    margin-bottom: 1.5rem;
   }
 }
 
