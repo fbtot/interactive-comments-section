@@ -24,6 +24,7 @@
   --h5-font-size: 1.1rem;
   --h6-font-size: 1rem;
   --border-radius: 0.5rem;
+  --transition: 0.15s ease-in-out;
 }
 
 /* ========================== § PROGRESS BAR COLORS === */
@@ -101,6 +102,7 @@ h6 {
 a {
   color: var(--accent-color);
   text-decoration: none;
+  transition: color var(--transition);
 }
 a:hover {
   color: var(--light-grayish-blue);
@@ -205,6 +207,7 @@ textarea {
   border-radius: var(--border-radius);
   border: none;
   text-transform: uppercase;
+  transition: var(--transition);
 }
 
 .blue-button {
