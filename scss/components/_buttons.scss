@@ -16,3 +16,13 @@
     background: var(--light-grayish-blue);
   }
 }
+
+.red-button {
+  @extend .basic-button;
+  background: var(--soft-red);
+  color: white;
+
+  &:hover {
+    background: var(--pale-red);
+  }
+}

@@ -27,6 +27,21 @@
       "points comment comment";
     grid-gap: 1.5rem;
   }
+
+  &.edit-comment {
+    grid-template-areas:
+      "header header header header"
+      "comment comment comment comment"
+      "editBtns editBtns editBtns editBtns"
+      "points points action action";
+
+    @include mq($desktop-width, up) {
+      grid-template-areas:
+        "points header action"
+        "points comment comment"
+        "points editBtns editBtns";
+    }
+  }
 }
 
 .replies-container {
@@ -60,6 +75,9 @@
     margin-left: auto;
     display: inline-flex;
   }
+}
+.comment__edit-buttons {
+  grid-area: editBtns;
 }
 
 .reply {
@@ -136,6 +154,17 @@
 
   &:hover {
     color: var(--pale-red);
+  }
+}
+
+/* =================================== § EDIT === */
+
+.comment__edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+
+  > * + * {
+    margin-left: 1rem;
   }
 }
 

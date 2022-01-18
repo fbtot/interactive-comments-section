@@ -194,7 +194,7 @@ textarea {
   border: 2px solid var(--light-gray);
 }
 
-.basic-button, .blue-button {
+.basic-button, .red-button, .blue-button {
   padding: 1rem 2rem;
   border-radius: var(--border-radius);
   border: none;
@@ -207,6 +207,14 @@ textarea {
 }
 .blue-button:hover {
   background: var(--light-grayish-blue);
+}
+
+.red-button {
+  background: var(--soft-red);
+  color: white;
+}
+.red-button:hover {
+  background: var(--pale-red);
 }
 
 /* ============================================ */
@@ -238,6 +246,16 @@ textarea {
     grid-template-rows: auto;
     grid-template-areas: "points header action" "points comment comment";
     grid-gap: 1.5rem;
+    /* end mixin mq */
+  }
+}
+.comment-container.edit-comment {
+  grid-template-areas: "header header header header" "comment comment comment comment" "editBtns editBtns editBtns editBtns" "points points action action";
+}
+@media screen and (min-width: 800px) {
+  .comment-container.edit-comment {
+    /* mixin mq */
+    grid-template-areas: "points header action" "points comment comment" "points editBtns editBtns";
     /* end mixin mq */
   }
 }
@@ -275,6 +293,10 @@ textarea {
 .comment__action > * {
   margin-left: auto;
   display: inline-flex;
+}
+
+.comment__edit-buttons {
+  grid-area: editBtns;
 }
 
 .reply {
@@ -352,6 +374,15 @@ textarea {
 }
 .comment__delete:hover {
   color: var(--pale-red);
+}
+
+/* =================================== § EDIT === */
+.comment__edit-buttons {
+  display: flex;
+  justify-content: flex-end;
+}
+.comment__edit-buttons > * + * {
+  margin-left: 1rem;
 }
 
 /* ============================================ */
