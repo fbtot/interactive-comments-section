@@ -104,6 +104,10 @@
   color: var(--dark-blue);
 }
 
+.comment__current-user-tag {
+  display: none;
+}
+
 .comment__date {
   @include mq($desktop-width, up) {
     white-space: nowrap;
@@ -131,14 +135,19 @@
 .comment__delete,
 .comment__edit {
   display: none;
-
-  .current-user & {
-    display: inline-flex;
-  }
 }
 
 .current-user {
   .comment__reply {
     display: none;
+  }
+
+  .comment__current-user-tag {
+    display: unset;
+  }
+
+  .comment__delete,
+  .comment__edit {
+    display: inline-flex;
   }
 }

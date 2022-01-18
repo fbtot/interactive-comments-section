@@ -314,6 +314,10 @@ textarea {
   color: var(--dark-blue);
 }
 
+.comment__current-user-tag {
+  display: none;
+}
+
 @media screen and (min-width: 800px) {
   .comment__date {
     /* mixin mq */
@@ -343,13 +347,16 @@ textarea {
 .comment__edit {
   display: none;
 }
-.current-user .comment__delete,
-.current-user .comment__edit {
-  display: inline-flex;
-}
 
 .current-user .comment__reply {
   display: none;
+}
+.current-user .comment__current-user-tag {
+  display: unset;
+}
+.current-user .comment__delete,
+.current-user .comment__edit {
+  display: inline-flex;
 }
 
 .counter {
