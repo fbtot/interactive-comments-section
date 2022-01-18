@@ -293,6 +293,10 @@ textarea {
   grid-area: points;
 }
 
+.comment__user-mention {
+  font-weight: 700;
+}
+
 .comment__action {
   grid-area: action;
   display: flex;
