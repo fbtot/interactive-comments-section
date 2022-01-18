@@ -11,5 +11,8 @@
 }
 
 .comments-container {
-  padding: 1rem;
+  --padding-container: 1rem;
+  padding: var(--padding-container);
+  max-width: calc(730px + var(--padding-container) * 2);
+  margin: 0 auto;
 }
