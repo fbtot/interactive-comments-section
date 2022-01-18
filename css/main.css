@@ -259,6 +259,11 @@ textarea {
 
 .comment__action {
   grid-area: action;
+  display: flex;
+}
+.comment__action > * {
+  margin-left: auto;
+  display: inline-block;
 }
 
 .reply {

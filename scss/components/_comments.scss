@@ -48,6 +48,12 @@
 
 .comment__action {
   grid-area: action;
+  display: flex;
+
+  > * {
+    margin-left: auto;
+    display: inline-block;
+  }
 }
 
 .reply {
