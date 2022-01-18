@@ -46,6 +46,7 @@ body {
   font-family: var(--body-font-family);
   color: var(--text-color);
   background-color: var(--very-light-grey);
+  width: 100%;
 }
 
 /* ========================== § TYPOGRAPHY === */
@@ -165,6 +166,11 @@ select {
   padding: 0.5rem;
 }
 
+textarea {
+  color: var(--text-color);
+  line-height: 1.5em;
+}
+
 button,
 input[type=submit] {
   cursor: pointer;
@@ -191,7 +197,7 @@ input[type=submit] {
 }
 
 textarea {
-  border: 2px solid var(--light-gray);
+  border: 1px solid var(--light-gray);
 }
 
 .basic-button, .red-button, .blue-button {
@@ -278,7 +284,8 @@ textarea {
   grid-area: header;
 }
 
-.comment__comment {
+.comment__comment,
+.comment__edit-comment {
   grid-area: comment;
 }
 
@@ -330,6 +337,12 @@ textarea {
 /* ============================================ */
 /* ··········································· § STYLES ··· */
 /* ======================================== */
+.comment__edit-comment,
+.reply__text {
+  resize: none;
+  min-height: 10rem;
+}
+
 .comment__meta {
   display: flex;
   align-items: center;
@@ -402,6 +415,12 @@ textarea {
 .current-user .comment__delete,
 .current-user .comment__edit {
   display: inline-flex;
+}
+
+.edit-comment .comment__delete,
+.edit-comment .comment__edit,
+.edit-comment .comment__reply {
+  display: none;
 }
 
 .counter {
