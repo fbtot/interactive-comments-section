@@ -314,8 +314,12 @@ textarea {
   color: var(--dark-blue);
 }
 
-.comment__date {
-  white-space: nowrap;
+@media screen and (min-width: 800px) {
+  .comment__date {
+    /* mixin mq */
+    white-space: nowrap;
+    /* end mixin mq */
+  }
 }
 
 .comment__action {

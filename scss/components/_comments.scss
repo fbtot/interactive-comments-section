@@ -105,7 +105,9 @@
 }
 
 .comment__date {
-  white-space: nowrap;
+  @include mq($desktop-width, up) {
+    white-space: nowrap;
+  }
 }
 
 .comment__action {
