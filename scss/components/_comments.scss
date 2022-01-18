@@ -52,7 +52,7 @@
 
   > * {
     margin-left: auto;
-    display: inline-block;
+    display: inline-flex;
   }
 }
 
@@ -104,6 +104,10 @@
   color: var(--dark-blue);
 }
 
+.comment__date {
+  white-space: nowrap;
+}
+
 .comment__action {
   display: flex;
   justify-content: flex-end;
@@ -117,4 +121,22 @@
 
 .comment__delete {
   color: var(--soft-red);
+}
+
+/* ============================================ */
+/* ··········································· § VISIBILITY ··· */
+/* ======================================== */
+.comment__delete,
+.comment__edit {
+  display: none;
+
+  .current-user & {
+    display: inline-flex;
+  }
+}
+
+.current-user {
+  .comment__reply {
+    display: none;
+  }
 }

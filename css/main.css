@@ -263,7 +263,7 @@ textarea {
 }
 .comment__action > * {
   margin-left: auto;
-  display: inline-block;
+  display: inline-flex;
 }
 
 .reply {
@@ -314,6 +314,10 @@ textarea {
   color: var(--dark-blue);
 }
 
+.comment__date {
+  white-space: nowrap;
+}
+
 .comment__action {
   display: flex;
   justify-content: flex-end;
@@ -326,6 +330,22 @@ textarea {
 
 .comment__delete {
   color: var(--soft-red);
+}
+
+/* ============================================ */
+/* ··········································· § VISIBILITY ··· */
+/* ======================================== */
+.comment__delete,
+.comment__edit {
+  display: none;
+}
+.current-user .comment__delete,
+.current-user .comment__edit {
+  display: inline-flex;
+}
+
+.current-user .comment__reply {
+  display: none;
 }
 
 .counter {
