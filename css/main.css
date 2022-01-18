@@ -102,7 +102,7 @@ h6 {
 a {
   color: var(--accent-color);
   text-decoration: none;
-  transition: color var(--transition);
+  transition: var(--transition);
 }
 a:hover {
   color: var(--light-grayish-blue);
