@@ -5,6 +5,9 @@ async function getJSONComments() {
 }
 
 const localStorageCommentsName = 'fmComments';
+const jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+// const localStorageCurrentUser = jsonLocalStorage.currentUser;
+// const localStorageComments = jsonLocalStorage.comments;
 
 function addJSONtoLocalStorage() {
   getJSONComments()
@@ -14,3 +17,8 @@ function addJSONtoLocalStorage() {
 if (!localStorage.localStorageCommentsName) {
   addJSONtoLocalStorage();
 }
+
+const second = 1000;
+const minute = 60 * second;
+const hour = 60 * minute;
+const day = 24 * hour;
