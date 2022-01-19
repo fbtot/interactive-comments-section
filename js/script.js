@@ -4,8 +4,13 @@ async function getJSONComments() {
   return jsonResponse;
 }
 
+const localStorageCommentsName = 'fmComments';
+
 function addJSONtoLocalStorage() {
-  getJSONComments().then((comments) => localStorage.setItem('fmComments', JSON.stringify(comments)));
+  getJSONComments()
+    .then((comments) => localStorage.setItem(localStorageCommentsName, JSON.stringify(comments)));
 }
 
-addJSONtoLocalStorage();
+if (!localStorage.localStorageCommentsName) {
+  addJSONtoLocalStorage();
+}
