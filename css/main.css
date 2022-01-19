@@ -330,7 +330,13 @@ textarea {
 
 .comment__counter-container {
   display: block;
-  align-self: end;
+}
+@media screen and (max-width: 799px) {
+  .comment__counter-container {
+    /* mixin mq */
+    align-self: end;
+    /* end mixin mq */
+  }
 }
 
 .reply {
@@ -470,7 +476,8 @@ textarea {
 
 .edit-comment .comment__delete,
 .edit-comment .comment__edit,
-.edit-comment .comment__reply {
+.edit-comment .comment__reply,
+.edit-comment .comment__counter-container {
   display: none;
 }
 

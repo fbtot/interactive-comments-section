@@ -102,7 +102,9 @@
 
 .comment__counter-container {
   display: block;
-  align-self: end;
+  @include mq($desktop-width, down) {
+    align-self: end;
+  }
 }
 
 .reply {
@@ -238,7 +240,8 @@
 .edit-comment {
   .comment__delete,
   .comment__edit,
-  .comment__reply {
+  .comment__reply,
+  .comment__counter-container {
     display: none;
   }
 }
