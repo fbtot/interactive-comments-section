@@ -43,6 +43,7 @@ function createdAt(creationDate) {
   const formattedGap = new Intl.RelativeTimeFormat('en');
   let relativeDate = '';
 
+  // TODO finire la funzione
   switch (true) {
     // The minus in front of the time is essential because the gap is negative
     case rawGap(creationDate) > -minute:
