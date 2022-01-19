@@ -14,7 +14,8 @@
 }
 
 // https://ismamz.github.io/postcss-utilities/docs
-%hide-visually {
+%hide-visually,
+.sr-only {
   position: absolute;
   width: 1px;
   height: 1px;
