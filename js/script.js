@@ -43,34 +43,33 @@ function createdAt(creationDate) {
   const formattedGap = new Intl.RelativeTimeFormat('en');
   let relativeDate = '';
 
-  // TODO finire la funzione
   switch (true) {
     // The minus in front of the time is essential because the gap is negative
     case rawGap(creationDate) > -minute:
-      console.log('A few seconds ago.');
+      relativeDate = 'A few seconds ago';
       break;
     case rawGap(creationDate) > -hour:
-      console.log('A few minutes ago.');
+      relativeDate = formattedGap.format(Math.floor(rawGap(creationDate) / minute), 'minutes');
       break;
     case rawGap(creationDate) > -day:
-      console.log('A few hours ago.');
+      relativeDate = formattedGap.format(Math.floor(rawGap(creationDate) / hour), 'hours');
       break;
     case rawGap(creationDate) > -week:
-      console.log('A few days ago.');
+      relativeDate = formattedGap.format(Math.floor(rawGap(creationDate) / day), 'days');
       break;
     case rawGap(creationDate) > -month:
-      console.log('A few weeks ago.');
+      relativeDate = formattedGap.format(Math.floor(rawGap(creationDate) / week), 'weeks');
       break;
     case rawGap(creationDate) > -year:
       relativeDate = formattedGap.format(Math.floor(rawGap(creationDate) / month), 'months');
       break;
-    case rawGap(creationDate) >= year:
-      console.log('More than a year ago');
+    case rawGap(creationDate) <= -year:
+      relativeDate = 'More than a year ago';
       break;
     default:
-      console.log('A while ago');
+      relativeDate = 'A while ago';
   }
   return relativeDate;
 }
 
-console.log(createdAt(jsonLocalStorage.comments[0].createdAt));
+console.log(createdAt(1609567850000));
