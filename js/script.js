@@ -1,4 +1,7 @@
 const commentsContainer = document.getElementById('commentsContainer');
+const upvoteLink = document.getElementsByClassName('counter__plus');
+const downvoteLink = document.getElementsByClassName('counter__minus');
+const suffixPointsID = '-points';
 const now = () => new Date().getTime();
 
 const second = 1000;
@@ -53,7 +56,7 @@ function createComment(index) {
   function checkCurrentUser() {
     return index.user.username === localStorageCurrentUser.username;
   }
-
+  // TODO aggiungere bold a counter__count
   return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
@@ -65,7 +68,7 @@ function createComment(index) {
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
                 <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
-                <span class="comment__points__count counter__count"><b>${index.score}</b></span>
+                <span id="${index.id}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
                 <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
               </div>
               </div>
@@ -99,6 +102,35 @@ function commentActions(currentUser) {
                 ${deleteLink}`;
   }
   return `${replyLink}`;
+}
+
+function commentPoints() {
+  Array.from(upvoteLink).forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log('upvote');
+    });
+  });
+
+  Array.from(downvoteLink).forEach((link) => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      console.log(e);
+    });
+  });
+}
+
+commentPoints();
+// ? aggiungere replythread all'html con l'ID del primo commento nella gerarchia, poi usare questa proprietà per trovare l'id corretto
+function addPoints(id) {
+  const thisCommentIndex = localStorageComments.findIndex((comment) => comment.id === id);
+  console.log(thisCommentIndex);
+  thisComment.score += 1;
+}
+
+function updatePoints(id) {
+  const idCountFromLocalStorage = localStorageComments.find((comment) => comment.id === id).score;
+  document.getElementById(`${id}${suffixPointsID}`).innerText = idCountFromLocalStorage;
 }
 
 function newID() {
