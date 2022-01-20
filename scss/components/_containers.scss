@@ -2,7 +2,7 @@
 
 .basic-container {
   border-radius: var(--border-radius);
-  padding: 1rem;
+  padding: var(--padding-container);
   background: white;
 
   @include mq($desktop-width, up) {
@@ -10,9 +10,7 @@
   }
 }
 
-.comments-container {
-  --padding-container: 1rem;
-  padding: var(--padding-container);
+.page-container {
   max-width: calc(730px + var(--padding-container) * 2);
   margin: 0 auto;
 }
