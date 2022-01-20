@@ -44,11 +44,10 @@ commentsContainer.innerHTML = localStorageComments
   .map((el) => {
     // let comment = createComment(el);
     if (el.replies.length > 0) {
-      const repliesContainer = document.createElement('div').classList.add('replies-container');
       return `${createComment(el)}
         <div class="replies-container">${el.replies
-    .sort((rep1, rep2) => rep1.createdAt - rep2.createdAt)
-    .map((rep) => createComment(rep)).join('')}
+    .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
+    .map((reply) => createComment(reply)).join('')}
       </div>`;
     }
     return createComment(el);
