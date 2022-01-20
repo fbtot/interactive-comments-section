@@ -50,13 +50,17 @@ commentsContainer.innerHTML = localStorageComments
   .join('');
 
 function createComment(index) {
-  return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container">
-            <div class="comment__meta">
-              <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
-              <a href="#" class="comment__author"><b>${index.user.username}</b></a>
-              <span class="comment__current-user-tag tag tag--blue">you</span>
+  function checkCurrentUser() {
+    return index.user.username === localStorageCurrentUser.username;
+  }
+
+  return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
+  <div class="comment__meta">
+  <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
+  <a href="#" class="comment__author"><b>${index.user.username}</b></a>
+  <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
-            </div>
+              </div>
             <div class="comment__comment">${index.content}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
@@ -64,21 +68,33 @@ function createComment(index) {
                 <span class="comment__points__count counter__count"><b>${index.score}</b></span>
                 <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
               </div>
-            </div>
+              </div>
             <div class="comment__action">
-              <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
-              <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
-              <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+            ${commentActions(checkCurrentUser())}
             </div>
           </div>`;
 }
 
+function currentUserClass(currentUser) {
+  if (currentUser) return ' current-user ';
+}
 function createReplies(parentComment) {
   return `<div class="replies-container">
     ${parentComment.replies
     .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
     .map((reply) => createComment(reply)).join('')}
     </div>`;
+}
+
+function commentActions(currentUser) {
+  const replyLink = '<a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>';
+  const editLink = '<a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>';
+  const deleteLink = '<a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>';
+  if (currentUser) {
+    return `${editLink}
+                ${deleteLink}`;
+  }
+  return `${replyLink}`;
 }
 
 function newID() {
