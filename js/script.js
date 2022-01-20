@@ -42,16 +42,12 @@ const localStorageComments = jsonLocalStorage.comments;
 commentsContainer.innerHTML = localStorageComments
   .sort((comment1, comment2) => comment2.score - comment1.score)
   .map((el) => {
-    // let comment = createComment(el);
     if (el.replies.length > 0) {
-      return `${createComment(el)}
-        <div class="replies-container">${el.replies
-    .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
-    .map((reply) => createComment(reply)).join('')}
-      </div>`;
+      return `${createComment(el)} ${createReplies(el)}`;
     }
     return createComment(el);
-  }).join('');
+  })
+  .join('');
 
 function createComment(index) {
   return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container">
@@ -75,6 +71,14 @@ function createComment(index) {
               <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
             </div>
           </div>`;
+}
+
+function createReplies(parentComment) {
+  return `<div class="replies-container">
+    ${parentComment.replies
+    .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
+    .map((reply) => createComment(reply)).join('')}
+    </div>`;
 }
 
 function newID() {
