@@ -55,10 +55,10 @@ function createComment(index) {
   }
 
   return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
-  <div class="comment__meta">
-  <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
-  <a href="#" class="comment__author"><b>${index.user.username}</b></a>
-  <span class="comment__current-user-tag tag tag--blue">you</span>
+              <div class="comment__meta">
+                <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
+                <a href="#" class="comment__author"><b>${index.user.username}</b></a>
+                <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
               </div>
             <div class="comment__comment">${index.content}</div>
@@ -76,7 +76,11 @@ function createComment(index) {
 }
 
 function currentUserClass(currentUser) {
-  if (currentUser) return ' current-user ';
+  let className = '';
+  if (currentUser) {
+    className = ' current-user ';
+  }
+  return className;
 }
 function createReplies(parentComment) {
   return `<div class="replies-container">
