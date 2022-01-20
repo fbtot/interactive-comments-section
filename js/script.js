@@ -1,3 +1,14 @@
+const commentsContainer = document.getElementById('commentsContainer');
+const now = () => new Date().getTime();
+
+const second = 1000;
+const minute = 60 * second;
+const hour = 60 * minute;
+const day = 24 * hour;
+const week = 7 * day;
+const month = 4 * week;
+const year = 12 * month;
+
 async function getJSONComments() {
   const response = await fetch('./data.json');
   const jsonResponse = response.json();
@@ -5,9 +16,7 @@ async function getJSONComments() {
 }
 
 const localStorageCommentsName = 'fmComments';
-// const localStorageCurrentUser = jsonLocalStorage.currentUser;
 let jsonLocalStorage;
-// const localStorageComments = jsonLocalStorage.comments;
 
 function addJSONtoLocalStorage() {
   getJSONComments()
@@ -23,17 +32,49 @@ if (!localStorage.getItem(localStorageCommentsName)) {
   jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
 }
 
-const newID = () => `comment-${uuidv4().substring(0, 8)}`;
+const localStorageCurrentUser = jsonLocalStorage.currentUser;
+const localStorageComments = jsonLocalStorage.comments;
 
-const second = 1000;
-const minute = 60 * second;
-const hour = 60 * minute;
-const day = 24 * hour;
-const week = 7 * day;
-const month = 4 * week;
-const year = 12 * month;
+/* ============================================ */
+/* ··········································· §  ··· */
+/* ======================================== */
 
-const now = () => new Date().getTime();
+commentsContainer.innerHTML = localStorageComments
+  .sort((comment1, comment2) => comment2.score - comment1.score)
+  .map((el) => createComment(el))
+  .join('');
+
+console.log(localStorageComments
+  .sort((comment1, comment2) => comment2.score - comment1.score)
+  .map((el) => createComment(el)).join(''));
+
+function createComment(index) {
+  return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container">
+            <div class="comment__meta">
+              <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
+              <a href="#" class="comment__author"><b>${index.user.username}</b></a>
+              <span class="comment__current-user-tag tag tag--blue">you</span>
+              <span class="comment__date">${createdAt(index.createdAt)}</span>
+            </div>
+            <div class="comment__comment">${index.content}</div>
+            <div class="counter-container comment__counter-container">
+              <div class="comment__points counter">
+                <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+                <span class="comment__points__count counter__count"><b>${index.score}</b></span>
+                <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+              </div>
+            </div>
+            <div class="comment__action">
+              <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+              <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+              <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+            </div>
+          </div>`;
+}
+
+function newID() {
+  return `comment-${uuidv4().substring(0, 8)}`;
+}
 
 function rawGap(then) {
   return then - now();
@@ -75,5 +116,3 @@ function createdAt(creationDate) {
   }
   return relativeDate;
 }
-
-console.log(createdAt(1609567850000));
