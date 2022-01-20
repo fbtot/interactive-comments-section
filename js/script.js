@@ -11,11 +11,15 @@ let jsonLocalStorage;
 
 function addJSONtoLocalStorage() {
   getJSONComments()
-    .then((comments) => localStorage.setItem(localStorageCommentsName, JSON.stringify(comments)));
+    .then((comments) => {
+      localStorage.setItem(localStorageCommentsName, JSON.stringify(comments));
+      jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+    });
 }
 
-if (!localStorage.localStorageCommentsName) {
+if (!localStorage.getItem(localStorageCommentsName)) {
   addJSONtoLocalStorage();
+} else {
   jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
 }
 
