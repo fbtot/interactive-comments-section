@@ -41,12 +41,18 @@ const localStorageComments = jsonLocalStorage.comments;
 
 commentsContainer.innerHTML = localStorageComments
   .sort((comment1, comment2) => comment2.score - comment1.score)
-  .map((el) => createComment(el))
-  .join('');
-
-console.log(localStorageComments
-  .sort((comment1, comment2) => comment2.score - comment1.score)
-  .map((el) => createComment(el)).join(''));
+  .map((el) => {
+    // let comment = createComment(el);
+    if (el.replies.length > 0) {
+      const repliesContainer = document.createElement('div').classList.add('replies-container');
+      return `${createComment(el)}
+        <div class="replies-container">${el.replies
+    .sort((rep1, rep2) => rep1.createdAt - rep2.createdAt)
+    .map((rep) => createComment(rep)).join('')}
+      </div>`;
+    }
+    return createComment(el);
+  }).join('');
 
 function createComment(index) {
   return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container">
