@@ -11,6 +11,8 @@ const day = 24 * hour;
 const week = 7 * day;
 const month = 4 * week;
 const year = 12 * month;
+let localStorageCurrentUser = {};
+let localStorageComments = {};
 
 async function getJSONComments() {
   const response = await fetch('./data.json');
@@ -19,28 +21,32 @@ async function getJSONComments() {
 }
 
 const localStorageCommentsName = 'fmComments';
-let jsonLocalStorage;
+let jsonFromLocalStorage;
 
 function addJSONtoLocalStorage() {
   getJSONComments()
     .then((comments) => {
       localStorage.setItem(localStorageCommentsName, JSON.stringify(comments));
-      jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+      jsonFromLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+      localStorageCurrentUser = jsonFromLocalStorage.currentUser;
+      localStorageComments = jsonFromLocalStorage.comments;
+      displayComments();
+      commentPoints();
     });
 }
 
 if (!localStorage.getItem(localStorageCommentsName)) {
   addJSONtoLocalStorage();
 } else {
-  jsonLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+  jsonFromLocalStorage = JSON.parse(localStorage[localStorageCommentsName]);
+  localStorageCurrentUser = jsonFromLocalStorage.currentUser;
+  localStorageComments = jsonFromLocalStorage.comments;
+  displayComments();
+  commentPoints();
 }
 
-const localStorageCurrentUser = jsonLocalStorage.currentUser;
-const localStorageComments = jsonLocalStorage.comments;
-
 function updateLocalStorage() {
-  localStorage.setItem(localStorageCommentsName, JSON.stringify(jsonLocalStorage));
-  // console.log(jsonLocalStorage);
+  localStorage.setItem(localStorageCommentsName, JSON.stringify(jsonFromLocalStorage));
 }
 
 function thisComment(el) {
@@ -54,15 +60,17 @@ function thisCommentID(el) {
 /* ··········································· §  ··· */
 /* ======================================== */
 
-commentsContainer.innerHTML = localStorageComments
-  .sort((comment1, comment2) => comment2.score - comment1.score)
-  .map((el) => {
-    if (el.replies.length > 0) {
-      return `${createComment(el)} ${createReplies(el)}`;
-    }
-    return createComment(el);
-  })
-  .join('');
+function displayComments() {
+  commentsContainer.innerHTML = localStorageComments
+    .sort((comment1, comment2) => comment2.score - comment1.score)
+    .map((el) => {
+      if (el.replies.length > 0) {
+        return `${createComment(el)} ${createReplies(el)}`;
+      }
+      return createComment(el);
+    })
+    .join('');
+}
 
 function createComment(index) {
   function checkCurrentUser() {
@@ -122,6 +130,7 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
+      console.log(commentID);
       if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
         addPointsToJSON(commentID);
         updateScoreDOM(commentID);
@@ -143,8 +152,6 @@ function commentPoints() {
   });
 }
 
-commentPoints();
-
 // eslint-disable-next-line
 // TODO: aggiungere replythread all'html con l'ID del primo commento nella gerarchia, poi usare questa proprietà per trovare l'id corretto
 
@@ -162,14 +169,16 @@ function updateScoreDOM(id) {
 
 function findComment(id) {
   let foundComment = {};
-
-  localStorageComments.find((el) => {
-    if (el.id === id) foundComment = el;
-    foundComment = el.replies.find((reply) => reply.id === id);
+  localStorageComments.find((comm) => {
+    if (comm.id === id) foundComment = comm;
+    else {
+      comm.replies.find((reply) => {
+        if (reply.id === id) foundComment = reply;
+      });
+    }
   });
   return foundComment;
 }
-
 // eslint-disable-next-line
 function newID() {
   return `comment-${uuidv4().substring(0, 8)}`;
