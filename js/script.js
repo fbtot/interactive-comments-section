@@ -56,10 +56,22 @@ function thisCommentID(el) {
   return thisComment(el).getAttribute('data-id');
 }
 
+function findComment(id) {
+  let foundComment = {};
+  localStorageComments.forEach((comm) => {
+    if (comm.id === id) foundComment = comm;
+    else {
+      comm.replies.forEach((reply) => {
+        if (reply.id === id) foundComment = reply;
+      });
+    }
+  });
+  return foundComment;
+}
+
 /* ============================================ */
 /* ··········································· §  ··· */
 /* ======================================== */
-
 function displayComments() {
   commentsContainer.innerHTML = localStorageComments
     .sort((comment1, comment2) => comment2.score - comment1.score)
@@ -152,9 +164,6 @@ function commentPoints() {
   });
 }
 
-// eslint-disable-next-line
-// TODO: aggiungere replythread all'html con l'ID del primo commento nella gerarchia, poi usare questa proprietà per trovare l'id corretto
-
 function subtractPointsToJSON(id) {
   findComment(id).score -= 1;
 }
@@ -167,18 +176,6 @@ function updateScoreDOM(id) {
   document.getElementById(`${id}-points`).innerText = findComment(id).score;
 }
 
-function findComment(id) {
-  let foundComment = {};
-  localStorageComments.find((comm) => {
-    if (comm.id === id) foundComment = comm;
-    else {
-      comm.replies.find((reply) => {
-        if (reply.id === id) foundComment = reply;
-      });
-    }
-  });
-  return foundComment;
-}
 // eslint-disable-next-line
 function newID() {
   return `comment-${uuidv4().substring(0, 8)}`;
@@ -187,8 +184,6 @@ function newID() {
 function rawGap(then) {
   return then - now();
 }
-
-// console.log(rawGap(jsonLocalStorage.comments[0].createdAt));
 
 // TODO: Tooltip to display the full date.
 
