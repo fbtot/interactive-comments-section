@@ -116,14 +116,17 @@ function commentActions(currentUser) {
   return `${replyLink}`;
 }
 
+// TODO: add unclickaable links in css whan the comment is by current user
 function commentPoints() {
   Array.from(upvoteLink).forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      addPointsToJSON(commentID);
-      updateScoreDOM(commentID);
-      updateLocalStorage();
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+        addPointsToJSON(commentID);
+        updateScoreDOM(commentID);
+        updateLocalStorage();
+      }
     });
   });
 
@@ -131,9 +134,11 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      subtractPointsToJSON(commentID);
-      updateScoreDOM(commentID);
-      updateLocalStorage();
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+        subtractPointsToJSON(commentID);
+        updateScoreDOM(commentID);
+        updateLocalStorage();
+      }
     });
   });
 }
