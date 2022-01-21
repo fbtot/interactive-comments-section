@@ -38,6 +38,18 @@ if (!localStorage.getItem(localStorageCommentsName)) {
 const localStorageCurrentUser = jsonLocalStorage.currentUser;
 const localStorageComments = jsonLocalStorage.comments;
 
+function updateLocalStorage() {
+  localStorage.setItem(localStorageCommentsName, JSON.stringify(jsonLocalStorage));
+  // console.log(jsonLocalStorage);
+}
+
+function thisComment(el) {
+  return el.closest('.comment-container');
+}
+function thisCommentID(el) {
+  return thisComment(el).getAttribute('data-id');
+}
+
 /* ============================================ */
 /* ··········································· §  ··· */
 /* ======================================== */
@@ -56,8 +68,8 @@ function createComment(index) {
   function checkCurrentUser() {
     return index.user.username === localStorageCurrentUser.username;
   }
-  // TODO aggiungere bold a counter__count
-  return `<div id="${index.id}" data-id="${index.id}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
+  // TODO: aggiungere bold a counter__count
+  return `<div id="${index.id}" data-id="${index.id}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
                 <a href="#" class="comment__author"><b>${index.user.username}</b></a>
@@ -86,7 +98,7 @@ function currentUserClass(currentUser) {
   return className;
 }
 function createReplies(parentComment) {
-  return `<div class="replies-container">
+  return `<div class="replies-container" data-id-parent="${parentComment.id}">
     ${parentComment.replies
     .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
     .map((reply) => createComment(reply)).join('')}
@@ -108,31 +120,52 @@ function commentPoints() {
   Array.from(upvoteLink).forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      console.log('upvote');
+      const commentID = thisCommentID(link);
+      addPointsToJSON(commentID);
+      updateScoreDOM(commentID);
+      updateLocalStorage();
     });
   });
 
   Array.from(downvoteLink).forEach((link) => {
     link.addEventListener('click', (e) => {
       e.preventDefault();
-      console.log(e);
+      const commentID = thisCommentID(link);
+      subtractPointsToJSON(commentID);
+      updateScoreDOM(commentID);
+      updateLocalStorage();
     });
   });
 }
 
 commentPoints();
-// ? aggiungere replythread all'html con l'ID del primo commento nella gerarchia, poi usare questa proprietà per trovare l'id corretto
-function addPoints(id) {
-  const thisCommentIndex = localStorageComments.findIndex((comment) => comment.id === id);
-  console.log(thisCommentIndex);
-  thisComment.score += 1;
+
+// eslint-disable-next-line
+// TODO: aggiungere replythread all'html con l'ID del primo commento nella gerarchia, poi usare questa proprietà per trovare l'id corretto
+
+function subtractPointsToJSON(id) {
+  findComment(id).score -= 1;
 }
 
-function updatePoints(id) {
-  const idCountFromLocalStorage = localStorageComments.find((comment) => comment.id === id).score;
-  document.getElementById(`${id}${suffixPointsID}`).innerText = idCountFromLocalStorage;
+function addPointsToJSON(id) {
+  findComment(id).score += 1;
 }
 
+function updateScoreDOM(id) {
+  document.getElementById(`${id}-points`).innerText = findComment(id).score;
+}
+
+function findComment(id) {
+  let foundComment = {};
+
+  localStorageComments.find((el) => {
+    if (el.id === id) foundComment = el;
+    foundComment = el.replies.find((reply) => reply.id === id);
+  });
+  return foundComment;
+}
+
+// eslint-disable-next-line
 function newID() {
   return `comment-${uuidv4().substring(0, 8)}`;
 }
@@ -143,7 +176,7 @@ function rawGap(then) {
 
 // console.log(rawGap(jsonLocalStorage.comments[0].createdAt));
 
-// ? Tooltip to display the full date.
+// TODO: Tooltip to display the full date.
 
 function createdAt(creationDate) {
   const formattedGap = new Intl.RelativeTimeFormat('en');
