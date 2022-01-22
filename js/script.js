@@ -99,9 +99,9 @@ function createComment(index) {
             <div class="comment__comment">${index.content}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
-                <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+                <a href="#" id="${index.id}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
                 <span id="${index.id}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
-                <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+                <a href="#" id="${index.id}-downvote" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
               </div>
               </div>
             <div class="comment__action">
@@ -178,6 +178,7 @@ function updateScoreDOM(id) {
 
 // eslint-disable-next-line
 function newID() {
+  // eslint-disable-next-line no-undef
   return `comment-${uuidv4().substring(0, 8)}`;
 }
 
@@ -192,7 +193,7 @@ function createdAt(creationDate) {
   let relativeDate = '';
 
   switch (true) {
-    // The minus in front of the time is essential because the gap is negative
+    // The minus in front of the time variable is essential because the gap is negative
     case rawGap(creationDate) > -minute:
       relativeDate = 'A few seconds ago';
       break;
