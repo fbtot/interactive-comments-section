@@ -32,12 +32,16 @@
 .counter__minus {
   color: var(--light-grayish-blue);
 
-  &:hover,
-  &.voted {
+  &:hover {
     color: var(--moderate-blue);
+
+    .current-user & {
+      color: var(--light-grayish-blue);
+    }
   }
 
   &.voted {
+    color: var(--moderate-blue);
     font-weight: 700;
   }
 }

@@ -88,7 +88,7 @@ function createComment(index) {
   function checkCurrentUser() {
     return index.user.username === localStorageCurrentUser.username;
   }
-  // TODO: aggiungere bold a counter__count
+
   const thisCommentID = index.id;
   return `<div id="${thisCommentID}" data-id="${thisCommentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">

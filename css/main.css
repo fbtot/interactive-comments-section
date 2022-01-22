@@ -483,6 +483,10 @@ textarea {
 .current-user .comment__edit {
   display: inline-flex;
 }
+.current-user .comment__points__upvote,
+.current-user .comment__points__downvote {
+  cursor: not-allowed;
+}
 
 .edit-comment .comment__delete,
 .edit-comment .comment__edit,
@@ -532,13 +536,17 @@ textarea {
 .counter__minus {
   color: var(--light-grayish-blue);
 }
-.counter__plus:hover, .counter__plus.voted,
-.counter__minus:hover,
-.counter__minus.voted {
+.counter__plus:hover,
+.counter__minus:hover {
   color: var(--moderate-blue);
+}
+.current-user .counter__plus:hover,
+.current-user .counter__minus:hover {
+  color: var(--light-grayish-blue);
 }
 .counter__plus.voted,
 .counter__minus.voted {
+  color: var(--moderate-blue);
   font-weight: 700;
 }
 

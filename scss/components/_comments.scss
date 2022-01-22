@@ -235,6 +235,11 @@
   .comment__edit {
     display: inline-flex;
   }
+
+  .comment__points__upvote,
+  .comment__points__downvote {
+    cursor: not-allowed;
+  }
 }
 
 .edit-comment {
