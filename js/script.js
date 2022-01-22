@@ -175,6 +175,17 @@ function updateScoreDOM(id) {
   document.getElementById(`${id}-points`).innerText = findComment(id).score;
 }
 
+function addVoteToUser(id, vote) {
+  if (!localStorageCurrentUser.votes) {
+    localStorageCurrentUser.votes = {};
+  }
+  localStorageCurrentUser.votes[id] = vote;
+}
+
+function checkUserVoted(id, kindOfVote) {
+  return localStorageCurrentUser.votes[id] === kindOfVote;
+}
+
 // eslint-disable-next-line
 function newID() {
   // eslint-disable-next-line no-undef
