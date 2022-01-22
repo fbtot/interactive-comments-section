@@ -150,8 +150,11 @@
 .comment__meta {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 0.5rem 1rem;
+
+  @include mq($small-size, down) {
+    flex-wrap: wrap;
+  }
 }
 
 .comment__date {

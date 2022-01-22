@@ -397,8 +397,14 @@ textarea {
 .comment__meta {
   display: flex;
   align-items: center;
-  flex-wrap: wrap;
   gap: 0.5rem 1rem;
+}
+@media screen and (max-width: 378px) {
+  .comment__meta {
+    /* mixin mq */
+    flex-wrap: wrap;
+    /* end mixin mq */
+  }
 }
 
 @media screen and (max-width: 378px) {
