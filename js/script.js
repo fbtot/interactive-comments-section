@@ -142,9 +142,10 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username && !checkUserVoted(commentID, 'upvote')) {
         addPointsToJSON(commentID);
         updateScoreDOM(commentID);
+        addVoteToUser(commentID, 'upvote');
         updateLocalStorage();
       }
     });
@@ -154,9 +155,10 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username && !checkUserVoted(commentID, 'downvote')) {
         subtractPointsToJSON(commentID);
         updateScoreDOM(commentID);
+        addVoteToUser(commentID, 'downvote');
         updateLocalStorage();
       }
     });
