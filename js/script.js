@@ -89,8 +89,8 @@ function createComment(index) {
     return index.user.username === localStorageCurrentUser.username;
   }
 
-  const thisCommentID = index.id;
-  return `<div id="${thisCommentID}" data-id="${thisCommentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
+  const commentID = index.id;
+  return `<div id="${commentID}" data-id="${commentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
                 <a href="#" class="comment__author"><b>${index.user.username}</b></a>
@@ -100,9 +100,9 @@ function createComment(index) {
             <div class="comment__comment">${index.content}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
-                <a href="#" id="${thisCommentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(thisCommentID, 'upvote')}"><i class="bx bx-plus"></i></a>
-                <span id="${thisCommentID}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
-                <a href="#" id="${thisCommentID}-downvote" aria-label="downvote" class="counter__minus comment__points__downvote ${votedClass(thisCommentID, 'downvote')} "><i class="bx bx-minus"></i></a>
+                <a href="#" id="${commentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(commentID, 'upvote')}"><i class="bx bx-plus"></i></a>
+                <span id="${commentID}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
+                <a href="#" id="${commentID}-downvote" aria-label="downvote" class="counter__minus comment__points__downvote ${votedClass(commentID, 'downvote')} "><i class="bx bx-minus"></i></a>
               </div>
               </div>
             <div class="comment__action">
@@ -153,16 +153,15 @@ function commentPoints() {
 
       if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
         if (checkUserVoted(commentID, 'downvote')) {
-          editPointsToJSON(commentID, 2);
+          editPointsInJSON(commentID, 2);
           addVoteToUser(commentID, 'upvote');
           addVotedClass(commentID, 'upvote');
-        } else
-        if (checkUserVoted(commentID, 'upvote')) {
-          editPointsToJSON(commentID, -1);
+        } else if (checkUserVoted(commentID, 'upvote')) {
+          editPointsInJSON(commentID, -1);
           removeVotedClass(commentID, 'upvote');
           removeVotefromUser(commentID);
         } else {
-          editPointsToJSON(commentID);
+          editPointsInJSON(commentID, 1);
           addVoteToUser(commentID, 'upvote');
           addVotedClass(commentID, 'upvote');
         }
@@ -179,16 +178,15 @@ function commentPoints() {
 
       if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
         if (checkUserVoted(commentID, 'upvote')) {
-          editPointsToJSON(commentID, -2);
+          editPointsInJSON(commentID, -2);
           addVoteToUser(commentID, 'downvote');
           addVotedClass(commentID, 'downvote');
-        } else
-        if (checkUserVoted(commentID, 'downvote')) {
-          editPointsToJSON(commentID, 1);
+        } else if (checkUserVoted(commentID, 'downvote')) {
+          editPointsInJSON(commentID, 1);
           removeVotedClass(commentID, 'downvote');
           removeVotefromUser(commentID);
         } else {
-          editPointsToJSON(commentID, -1);
+          editPointsInJSON(commentID, -1);
           addVoteToUser(commentID, 'downvote');
           addVotedClass(commentID, 'downvote');
         }
@@ -199,7 +197,7 @@ function commentPoints() {
   });
 }
 
-function editPointsToJSON(id, points = 1) {
+function editPointsInJSON(id, points = 1) {
   findComment(id).score += points;
 }
 
