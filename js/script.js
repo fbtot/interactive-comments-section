@@ -150,11 +150,23 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      if (findComment(commentID).user.username !== localStorageCurrentUser.username && !checkUserVoted(commentID, 'upvote')) {
-        addPointsToJSON(commentID);
+
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+        if (checkUserVoted(commentID, 'downvote')) {
+          editPointsToJSON(commentID, 2);
+          addVoteToUser(commentID, 'upvote');
+          addVotedClass(commentID, 'upvote');
+        } else
+        if (checkUserVoted(commentID, 'upvote')) {
+          editPointsToJSON(commentID, -1);
+          removeVotedClass(commentID, 'upvote');
+          removeVotefromUser(commentID);
+        } else {
+          editPointsToJSON(commentID);
+          addVoteToUser(commentID, 'upvote');
+          addVotedClass(commentID, 'upvote');
+        }
         updateScoreDOM(commentID);
-        addVoteToUser(commentID, 'upvote');
-        addVotedClass(commentID, 'upvote');
         updateLocalStorage();
       }
     });
@@ -164,23 +176,31 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      if (findComment(commentID).user.username !== localStorageCurrentUser.username && !checkUserVoted(commentID, 'downvote')) {
-        subtractPointsToJSON(commentID);
+
+      if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
+        if (checkUserVoted(commentID, 'upvote')) {
+          editPointsToJSON(commentID, -2);
+          addVoteToUser(commentID, 'downvote');
+          addVotedClass(commentID, 'downvote');
+        } else
+        if (checkUserVoted(commentID, 'downvote')) {
+          editPointsToJSON(commentID, 1);
+          removeVotedClass(commentID, 'downvote');
+          removeVotefromUser(commentID);
+        } else {
+          editPointsToJSON(commentID, -1);
+          addVoteToUser(commentID, 'downvote');
+          addVotedClass(commentID, 'downvote');
+        }
         updateScoreDOM(commentID);
-        addVoteToUser(commentID, 'downvote');
-        addVotedClass(commentID, 'downvote');
         updateLocalStorage();
       }
     });
   });
 }
 
-function subtractPointsToJSON(id) {
-  findComment(id).score -= 1;
-}
-
-function addPointsToJSON(id) {
-  findComment(id).score += 1;
+function editPointsToJSON(id, points = 1) {
+  findComment(id).score += points;
 }
 
 function updateScoreDOM(id) {
@@ -194,6 +214,10 @@ function addVoteToUser(id, vote) {
   localStorageCurrentUser.votes[id] = vote;
 }
 
+function removeVotefromUser(id) {
+  delete localStorageCurrentUser.votes[id];
+}
+
 function checkUserVoted(id, kindOfVote) {
   return localStorageCurrentUser.votes[id] === kindOfVote;
 }
@@ -202,6 +226,10 @@ function addVotedClass(id, kindOfVote) {
   document.getElementById(`${id}-upvote`).classList.remove('voted');
   document.getElementById(`${id}-downvote`).classList.remove('voted');
   document.getElementById(`${id}-${kindOfVote}`).classList.add('voted');
+}
+
+function removeVotedClass(id, kindOfVote) {
+  document.getElementById(`${id}-${kindOfVote}`).classList.remove('voted');
 }
 
 // eslint-disable-next-line
