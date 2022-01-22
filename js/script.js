@@ -89,7 +89,8 @@ function createComment(index) {
     return index.user.username === localStorageCurrentUser.username;
   }
   // TODO: aggiungere bold a counter__count
-  return `<div id="${index.id}" data-id="${index.id}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
+  const thisCommentID = index.id;
+  return `<div id="${thisCommentID}" data-id="${thisCommentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
                 <a href="#" class="comment__author"><b>${index.user.username}</b></a>
@@ -99,9 +100,9 @@ function createComment(index) {
             <div class="comment__comment">${index.content}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
-                <a href="#" id="${index.id}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
-                <span id="${index.id}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
-                <a href="#" id="${index.id}-downvote" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+                <a href="#" id="${thisCommentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(thisCommentID, 'upvote')}"><i class="bx bx-plus"></i></a>
+                <span id="${thisCommentID}${suffixPointsID}" class="comment__points__count counter__count">${index.score}</span>
+                <a href="#" id="${thisCommentID}-downvote" aria-label="downvote" class="counter__minus comment__points__downvote ${votedClass(thisCommentID, 'downvote')} "><i class="bx bx-minus"></i></a>
               </div>
               </div>
             <div class="comment__action">
@@ -117,6 +118,13 @@ function currentUserClass(currentUser) {
   }
   return className;
 }
+
+function votedClass(id, kindOfVote) {
+  if (localStorageCurrentUser.votes[id] === kindOfVote) {
+    return 'voted';
+  }
+}
+
 function createReplies(parentComment) {
   return `<div class="replies-container" data-id-parent="${parentComment.id}">
     ${parentComment.replies
@@ -146,6 +154,7 @@ function commentPoints() {
         addPointsToJSON(commentID);
         updateScoreDOM(commentID);
         addVoteToUser(commentID, 'upvote');
+        addVotedClass(commentID, 'upvote');
         updateLocalStorage();
       }
     });
@@ -159,6 +168,7 @@ function commentPoints() {
         subtractPointsToJSON(commentID);
         updateScoreDOM(commentID);
         addVoteToUser(commentID, 'downvote');
+        addVotedClass(commentID, 'downvote');
         updateLocalStorage();
       }
     });
@@ -186,6 +196,12 @@ function addVoteToUser(id, vote) {
 
 function checkUserVoted(id, kindOfVote) {
   return localStorageCurrentUser.votes[id] === kindOfVote;
+}
+
+function addVotedClass(id, kindOfVote) {
+  document.getElementById(`${id}-upvote`).classList.remove('voted');
+  document.getElementById(`${id}-downvote`).classList.remove('voted');
+  document.getElementById(`${id}-${kindOfVote}`).classList.add('voted');
 }
 
 // eslint-disable-next-line
