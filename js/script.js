@@ -142,7 +142,6 @@ function commentPoints() {
     link.addEventListener('click', (e) => {
       e.preventDefault();
       const commentID = thisCommentID(link);
-      console.log(commentID);
       if (findComment(commentID).user.username !== localStorageCurrentUser.username) {
         addPointsToJSON(commentID);
         updateScoreDOM(commentID);
