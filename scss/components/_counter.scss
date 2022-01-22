@@ -21,6 +21,8 @@
 
 .counter__count {
   color: var(--moderate-blue);
+  font-weight: 700;
+
   @include mq($desktop-width, up) {
     margin: 0.4rem 0;
   }
@@ -30,7 +32,12 @@
 .counter__minus {
   color: var(--light-grayish-blue);
 
-  &:hover {
+  &:hover,
+  &.voted {
     color: var(--moderate-blue);
+  }
+
+  &.voted {
+    font-weight: 700;
   }
 }

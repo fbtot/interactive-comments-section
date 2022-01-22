@@ -518,6 +518,7 @@ textarea {
 
 .counter__count {
   color: var(--moderate-blue);
+  font-weight: 700;
 }
 @media screen and (min-width: 800px) {
   .counter__count {
@@ -531,9 +532,14 @@ textarea {
 .counter__minus {
   color: var(--light-grayish-blue);
 }
-.counter__plus:hover,
-.counter__minus:hover {
+.counter__plus:hover, .counter__plus.voted,
+.counter__minus:hover,
+.counter__minus.voted {
   color: var(--moderate-blue);
+}
+.counter__plus.voted,
+.counter__minus.voted {
+  font-weight: 700;
 }
 
 .icon-text__icon {
