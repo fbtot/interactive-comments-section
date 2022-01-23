@@ -286,6 +286,10 @@ textarea {
     /* end mixin mq */
   }
 }
+.comment-container.comment-deleted {
+  grid-template-areas: unset;
+  grid-template-columns: unset;
+}
 
 .replies-container {
   margin-left: 1rem;
@@ -299,6 +303,10 @@ textarea {
     padding-left: 2.7rem;
     /* end mixin mq */
   }
+}
+
+.comment__deleted-message {
+  font-style: italic;
 }
 
 .comment__meta {

@@ -51,6 +51,11 @@
         "points editBtns editBtns";
     }
   }
+
+  &.comment-deleted {
+    grid-template-areas: unset;
+    grid-template-columns: unset;
+  }
 }
 
 .replies-container {
@@ -62,6 +67,11 @@
     margin-left: 2.7rem;
     padding-left: 2.7rem;
   }
+}
+
+.comment__deleted-message {
+  font-style: italic;
+  // color: #c5d2d8;
 }
 
 .comment__meta {
