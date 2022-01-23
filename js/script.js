@@ -1,4 +1,5 @@
 const commentsContainer = document.getElementById('commentsContainer');
+const replyForms = document.getElementsByClassName('form');
 const upvoteLink = document.getElementsByClassName('counter__plus');
 const downvoteLink = document.getElementsByClassName('counter__minus');
 const suffixPointsID = '-points';
@@ -97,7 +98,7 @@ function createComment(index) {
                 <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
               </div>
-            <div class="comment__comment">${index.content}</div>
+            <div class="comment__comment">${addMentionsToText(index.content)}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
                 <a href="#" id="${commentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(commentID, 'upvote')}"><i class="bx bx-plus"></i></a>
@@ -119,6 +120,7 @@ function currentUserClass(currentUser) {
   return className;
 }
 
+// eslint-disable-next-line consistent-return
 function votedClass(id, kindOfVote) {
   if (localStorageCurrentUser.votes[id] === kindOfVote) {
     return 'voted';
@@ -273,4 +275,43 @@ function createdAt(creationDate) {
       relativeDate = 'A while ago';
   }
   return relativeDate;
+}
+
+Array.from(replyForms).forEach((el) => {
+  el.addEventListener('submit', (e) => {
+    e.preventDefault();
+    const replyText = document.getElementById('comment-reply-text').value.trim();
+
+    addNewCommentToJSON(replyText);
+    commentsContainer
+      .innerHTML += createComment(localStorageComments[localStorageComments.length - 1]);
+    updateLocalStorage();
+  });
+});
+
+function addNewCommentToJSON(content) {
+  const comment = generateNewCommentInJSON(content);
+  localStorageComments.push(comment);
+}
+
+function generateNewCommentInJSON(content) {
+  return {
+    id: newID(),
+    content: content.trim(),
+    createdAt: now(),
+    score: 0,
+    user: {
+      image: {
+        png: localStorageCurrentUser.image.png,
+        webp: localStorageCurrentUser.image.webp,
+      },
+      username: localStorageCurrentUser.username,
+    },
+    replies: [],
+  };
+}
+
+function addMentionsToText(text) {
+  const regex = /(?<=\s)@[^0-9\s]+/gmi; // matches everything except number and spaces
+  return text.replaceAll(regex, `<a class="comment__user-mention" href="#">${'$&'}</a>`);
 }

@@ -155,11 +155,11 @@
           </div>
           <!-- =================================== § REPLY === -->
           <div class="reply-container basic-container">
-            <form action="get" class="reply">
+            <form action="get" class="reply form">
               <textarea placeholder="Add a comment…" name="Comment-reply" id="comment-reply" class="reply__text"></textarea>
               <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
               <div class="reply__button-container">
-                <button class="reply__button blue-button">Send</button>
+                <button id="sendBtn" class="reply__button blue-button">Send</button>
               </div>
             </form>
           </div>
@@ -169,11 +169,11 @@
       <!-- ··········································· § REPLY ··· -->
       <!-- ======================================== -->
       <div class="reply-container basic-container">
-        <form action="get" class="reply">
-          <textarea placeholder="Add a comment…" name="Comment-reply" id="comment-reply" class="reply__text"></textarea>
+        <form method="get" class="reply form">
+          <textarea placeholder="Add a comment…" name="Comment-reply" id="comment-reply-text" class="reply__text"></textarea>
           <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
           <div class="reply__button-container">
-            <button class="reply__button blue-button">Send</button>
+            <button id="sendBtn" class="reply__button blue-button">Send</button>
           </div>
         </form>
       </div>
