@@ -1,7 +1,9 @@
 const commentsContainer = document.getElementById('commentsContainer');
+const deleteMessage = 'This comment has been deleted by the author.';
 const replyForms = document.getElementsByClassName('form');
 const upvoteLink = document.getElementsByClassName('counter__plus');
 const downvoteLink = document.getElementsByClassName('counter__minus');
+const deleteBtn = document.getElementsByClassName('comment__delete');
 const suffixPointsID = '-points';
 const now = () => new Date().getTime();
 
@@ -90,8 +92,12 @@ function createComment(index) {
     return index.user.username === localStorageCurrentUser.username;
   }
 
+  function checkDeleted() {
+    return index.deleted;
+  }
+
   const commentID = index.id;
-  return `<div id="${commentID}" data-id="${commentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${currentUserClass(checkCurrentUser())}">
+  const commentHTML = `<div id="${commentID}" data-id="${commentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${deletedCommentClass(checkDeleted())} ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
                 <a href="#" class="comment__author"><b>${index.user.username}</b></a>
@@ -110,12 +116,26 @@ function createComment(index) {
             ${commentActions(checkCurrentUser())}
             </div>
           </div>`;
+
+  const deletedCommentHTML = `<div id="${commentID}" data-id="${commentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container comment-deleted">
+  <p class="comment__deleted-message" >${deleteMessage}</p>
+          </div>`;
+
+  return checkDeleted() ? deletedCommentHTML : commentHTML;
 }
 
 function currentUserClass(currentUser) {
   let className = '';
   if (currentUser) {
     className = ' current-user ';
+  }
+  return className;
+}
+
+function deletedCommentClass(currentUser) {
+  let className = '';
+  if (currentUser) {
+    className = ' comment-deleted ';
   }
   return className;
 }
@@ -318,3 +338,21 @@ function addMentionsToText(text) {
   const regex = /(?<=\s)@[^0-9\s]+/gmi; // matches everything except number and spaces
   return text.replaceAll(regex, `<a class="comment__user-mention" href="#">${'$&'}</a>`);
 }
+
+function deleteComment() {
+  Array.from(deleteBtn).forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = thisCommentID(btn);
+      const comment = findComment(id);
+      comment.content = deleteMessage;
+      comment.deleted = true;
+      thisComment(btn).classList.add('comment-deleted');
+      document.getElementById(id).classList.add('comment-deleted');
+      document.getElementById(id).innerHTML = `<p class="comment__deleted-message">${deleteMessage}</p>`;
+      updateLocalStorage();
+    });
+  });
+}
+
+deleteComment();
