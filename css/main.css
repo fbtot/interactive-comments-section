@@ -210,6 +210,7 @@ input[type=submit] {
 
 textarea {
   border: 1px solid var(--light-gray);
+  resize: none;
 }
 
 .basic-button, .red-button, .blue-button {
@@ -388,13 +389,12 @@ textarea {
 /* ============================================ */
 /* ··········································· § STYLES ··· */
 /* ======================================== */
-.comment__edit-comment,
+.comment__edit-comment textarea,
 .reply__text {
-  resize: none;
   min-height: 10rem;
 }
 @media screen and (max-width: 378px) {
-  .comment__edit-comment,
+  .comment__edit-comment textarea,
 .reply__text {
     /* mixin mq */
     min-height: 25rem;
@@ -463,6 +463,10 @@ textarea {
 }
 
 /* =================================== § EDIT === */
+.comment__edit-comment textarea {
+  width: 100%;
+}
+
 .comment__edit-buttons {
   display: flex;
   justify-content: flex-end;

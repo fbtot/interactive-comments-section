@@ -137,13 +137,13 @@
               <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">1 month ago</span>
             </div>
-            <textarea class="comment__edit-comment">
-    Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.
-            </textarea>
-            <div class="comment__edit-buttons">
-              <button class="comment__edit-cancel red-button">Cancel</button>
-              <button class="comment__edit-update blue-button">Update</button>
-            </div>
+            <form action="" class="form comment__edit-comment">
+              <textarea validate placeholder="Write your reply..."> </textarea>
+              <div class="comment__edit-buttons">
+                <button class="comment__edit-cancel red-button">Cancel</button>
+                <button class="comment__edit-update blue-button">Update</button>
+              </div>
+            </form>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
                 <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
@@ -182,7 +182,7 @@
         </form>
       </div>
       <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
-      <script src="./js/script.js"></script>
+      <!-- <script src="./js/script.js"></script> -->
     </div>
   </body>
 </html>

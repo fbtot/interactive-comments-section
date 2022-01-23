@@ -148,9 +148,8 @@
 /* ··········································· § STYLES ··· */
 /* ======================================== */
 
-.comment__edit-comment,
+.comment__edit-comment textarea,
 .reply__text {
-  resize: none;
   min-height: 10rem;
 
   @include mq($small-size, down) {
@@ -213,6 +212,11 @@
 }
 
 /* =================================== § EDIT === */
+.comment__edit-comment {
+  textarea {
+    width: 100%;
+  }
+}
 
 .comment__edit-buttons {
   display: flex;
