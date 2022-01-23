@@ -301,15 +301,16 @@ function createdAt(creationDate) {
 Array.from(replyForms).forEach((el) => {
   el.addEventListener('submit', (e) => {
     e.preventDefault();
-    const replyText = document.getElementById('comment-reply-text').value.trim();
+    const replyElement = document.getElementById('comment-reply-text');
 
-    addNewCommentToJSON(replyText);
+    addNewCommentToJSON(replyElement.value.trim());
     commentsContainer
       .innerHTML += createComment(localStorageComments[localStorageComments.length - 1]);
 
     updateLocalStorage();
     commentPoints();
     deleteComment();
+    replyElement.value = '';
   });
 });
 
