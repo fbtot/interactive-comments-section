@@ -122,7 +122,7 @@ function currentUserClass(currentUser) {
 
 // eslint-disable-next-line consistent-return
 function votedClass(id, kindOfVote) {
-  if (localStorageCurrentUser.votes[id] === kindOfVote) {
+  if (localStorageCurrentUser.votes && localStorageCurrentUser.votes[id] === kindOfVote) {
     return 'voted';
   }
 }
@@ -219,7 +219,9 @@ function removeVotefromUser(id) {
 }
 
 function checkUserVoted(id, kindOfVote) {
-  return localStorageCurrentUser.votes[id] === kindOfVote;
+  if (localStorageCurrentUser.votes) {
+    return localStorageCurrentUser.votes[id] === kindOfVote;
+  }
 }
 
 function addVotedClass(id, kindOfVote) {
