@@ -309,6 +309,7 @@ Array.from(replyForms).forEach((el) => {
 
     updateLocalStorage();
     commentPoints();
+    deleteComment();
   });
 });
 
