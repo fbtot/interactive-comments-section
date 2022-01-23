@@ -146,7 +146,6 @@ function commentActions(currentUser) {
   return `${replyLink}`;
 }
 
-// TODO: add unclickaable links in css whan the comment is by current user
 function commentPoints() {
   Array.from(upvoteLink).forEach((link) => {
     link.addEventListener('click', (e) => {
@@ -287,7 +286,9 @@ Array.from(replyForms).forEach((el) => {
     addNewCommentToJSON(replyText);
     commentsContainer
       .innerHTML += createComment(localStorageComments[localStorageComments.length - 1]);
+
     updateLocalStorage();
+    commentPoints();
   });
 });
 
