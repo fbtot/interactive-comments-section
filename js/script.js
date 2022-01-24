@@ -4,6 +4,7 @@ const replyForms = document.getElementsByClassName('form');
 const upvoteLink = document.getElementsByClassName('counter__plus');
 const downvoteLink = document.getElementsByClassName('counter__minus');
 const deleteBtn = document.getElementsByClassName('comment__delete');
+const editBtn = document.getElementsByClassName('comment__edit');
 const suffixPointsID = '-points';
 const now = () => new Date().getTime();
 
@@ -104,7 +105,7 @@ function createComment(index) {
                 <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
               </div>
-            <div class="comment__comment">${addMentionsToText(index.content)}</div>
+            <div class="comment__comment" id="${commentID}-comment">${addMentionsToText(index.content)}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
                 <a href="#" id="${commentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(commentID, 'upvote')}"><i class="bx bx-plus"></i></a>
@@ -358,3 +359,64 @@ function deleteComment() {
 }
 
 deleteComment();
+
+function editComment() {
+  Array.from(editBtn).forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = thisCommentID(btn);
+      const commentJSON = findComment(id);
+      const comment = thisComment(btn);
+      comment.classList.add('edit-comment');
+      insertEdit(id);
+      cancelEdit(id);
+    });
+  });
+}
+
+editComment();
+
+function createEdit(id) {
+  return `<form method="get" id="${id}-edit-form" class="form comment__edit-comment">
+  <textarea id="${id}-comment-edit" validate placeholder="Write your reply..."> </textarea>
+  <div class="comment__edit-buttons">
+    <button id="${id}-cancel" class="comment__edit-cancel red-button">Cancel</button>
+    <button id="${id}-update" class="comment__edit-update blue-button">Update</button>
+  </div>
+</form>`;
+}
+
+function insertEdit(id) {
+  const commentContent = document.getElementById(`${id}-comment`);
+  commentContent.insertAdjacentHTML('afterend', createEdit(id));
+  document.getElementById(`${id}-comment-edit`).innerText = commentContent.innerText;
+}
+
+function cancelEdit(id) {
+  const cancelBtn = document.getElementById(`${id}-cancel`);
+  const updateBtn = document.getElementById(`${id}-update`);
+  const comment = document.getElementById(id);
+  const editForm = document.getElementById(`${id}-edit-form`);
+
+  cancelBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    comment.classList.remove('edit-comment');
+    // TODO: aggiungere modal
+    editForm.remove();
+  });
+
+  updateBtn.addEventListener('click', (e) => {
+    e.preventDefault();
+    updateComment(id);
+    comment.classList.remove('edit-comment');
+    editForm.remove();
+    updateLocalStorage();
+  });
+}
+// TODO: controllare che l'HTML nei commenti non sia distruttivo
+function updateComment(id) {
+  const commentContent = document.getElementById(`${id}-comment`);
+  const editContent = document.getElementById(`${id}-comment-edit`);
+  findComment(id).content = editContent.value;
+  commentContent.innerHTML = addMentionsToText(editContent.value);
+}
