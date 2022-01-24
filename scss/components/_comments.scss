@@ -81,6 +81,7 @@
 .comment__comment,
 .comment__edit-comment {
   grid-area: comment;
+  white-space: pre-wrap;
 }
 
 .counter-container {
