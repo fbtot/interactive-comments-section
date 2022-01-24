@@ -311,6 +311,7 @@ Array.from(replyForms).forEach((el) => {
 
     updateLocalStorage();
     commentPoints();
+    editComment();
     deleteComment();
     replyElement.value = '';
   });
