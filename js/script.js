@@ -5,6 +5,7 @@ const upvoteLink = document.getElementsByClassName('counter__plus');
 const downvoteLink = document.getElementsByClassName('counter__minus');
 const deleteBtn = document.getElementsByClassName('comment__delete');
 const editBtn = document.getElementsByClassName('comment__edit');
+const replyBtn = document.getElementsByClassName('comment__reply');
 const suffixPointsID = '-points';
 const now = () => new Date().getTime();
 
@@ -326,12 +327,13 @@ function addNewCommentToJSON(content) {
   localStorageComments.push(comment);
 }
 
-function generateNewCommentInJSON(content) {
+function generateNewCommentInJSON(content, userReply = null) {
   return {
     id: newID(),
     content: content.trim(),
     createdAt: now(),
     score: 0,
+    replyingTo: userReply,
     user: {
       image: {
         png: localStorageCurrentUser.image.png,
@@ -440,4 +442,42 @@ function updateComment(id) {
   const editContent = document.getElementById(`${id}-comment-edit`);
   findComment(id).content = editContent.value;
   commentContent.innerHTML = processText(editContent.value);
+}
+
+function reply() {
+  Array.from(replyBtn).forEach((btn) => {
+    btn.addEventListener('click', (e) => {
+      e.preventDefault();
+      const id = thisCommentID(btn);
+      const comment = thisComment(btn);
+
+      comment.insertAdjacentHTML('afterend', createReply(id));
+      sendReply(id);
+    });
+  });
+}
+
+function sendReply(id) {
+  document.getElementById(`${id}-comment-form`).addEventListener('submit', (e) => {
+    e.preventDefault();
+    console.log('send');
+  });
+}
+reply();
+
+function checkIsReply(el) {
+  return !!thisComment(el).getAttribute('replying-to');
+}
+
+function createReply(id) {
+  return `
+          <div class="reply-container basic-container">
+            <form action="get" class="reply form" id="${id}-comment-form">
+              <textarea placeholder="Add a reply…" name="Comment-reply" id="comment-reply ${id}-reply-edit" class="reply__text"></textarea>
+              <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
+              <div class="reply__button-container">
+                <button id="sendBtn ${id}-send-reply" class="reply__button blue-button">Send</button>
+              </div>
+            </form>
+  `;
 }
