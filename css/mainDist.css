@@ -573,6 +573,48 @@ textarea {
   margin-right: 0.3rem;
 }
 
+.swal-modal {
+  max-width: 380px;
+  padding: 0 1rem;
+}
+
+.swal-title {
+  text-align: left;
+  font-size: 20px;
+}
+
+.swal-text {
+  line-height: 1.5em;
+}
+
+.swal-footer {
+  display: flex;
+}
+
+.swal-button-container {
+  flex: 1 0 0;
+}
+
+.swal-button {
+  width: 100%;
+  text-transform: uppercase;
+  padding-top: 15px;
+  padding-bottom: 15px;
+}
+
+.swal-button--cancel {
+  background-color: var(--grayish-blue);
+  color: white;
+}
+
+.swal-button--cancel:not([disabled]):hover {
+  background-color: #8f99a3;
+}
+
+.swal-button--confirm {
+  background-color: var(--soft-red);
+}
+
 .tag {
   font-size: var(--small-font-size);
   padding: 0 0.5rem;
