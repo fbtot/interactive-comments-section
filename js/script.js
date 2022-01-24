@@ -358,16 +358,26 @@ function deleteComment() {
   Array.from(deleteBtn).forEach((btn) => {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
-      const id = thisCommentID(btn);
-      const comment = findComment(id);
-      comment.content = deleteMessage;
-      comment.deleted = true;
-      thisComment(btn).classList.add('comment-deleted');
-      document.getElementById(id).classList.add('comment-deleted');
-      document.getElementById(id).innerHTML = `<p class="comment__deleted-message">${deleteMessage}</p>`;
-      updateLocalStorage();
+
+      swal('Delete Comment', 'Are you sure you want to delete this comment? This will remove the comment and can\'t be undine.', {
+        dangerMode: true,
+        buttons: true,
+      }).then((willDelete) => {
+        if (willDelete) deleteAction(btn);
+      });
     });
   });
+}
+
+function deleteAction(el) {
+  const id = thisCommentID(el);
+  const comment = findComment(id);
+  comment.content = deleteMessage;
+  comment.deleted = true;
+  thisComment(el).classList.add('comment-deleted');
+  document.getElementById(id).classList.add('comment-deleted');
+  document.getElementById(id).innerHTML = `<p class="comment__deleted-message">${deleteMessage}</p>`;
+  updateLocalStorage();
 }
 
 deleteComment();
