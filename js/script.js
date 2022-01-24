@@ -105,7 +105,7 @@ function createComment(index) {
                 <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
               </div>
-            <div class="comment__comment" id="${commentID}-comment">${addMentionsToText(index.content)}</div>
+            <div class="comment__comment" id="${commentID}-comment">${processText(index.content)}</div>
             <div class="counter-container comment__counter-container">
               <div class="comment__points counter">
                 <a href="#" id="${commentID}-upvote" aria-label="upvote" class="counter__plus comment__points__upvote ${votedClass(commentID, 'upvote')}"><i class="bx bx-plus"></i></a>
@@ -342,6 +342,17 @@ function addMentionsToText(text) {
   return text.replaceAll(regex, `<a class="comment__user-mention" href="#">${'$&'}</a>`);
 }
 
+function preventHTMLInjection(text) {
+  return text.replace(/</g, '&lt;').replace(/>/g, '&gt;');
+}
+
+function processText(text) {
+  let result = text;
+  result = preventHTMLInjection(result);
+  result = addMentionsToText(result);
+  return result;
+}
+
 function deleteComment() {
   Array.from(deleteBtn).forEach((btn) => {
     btn.addEventListener('click', (e) => {
@@ -413,10 +424,9 @@ function cancelEdit(id) {
     updateLocalStorage();
   });
 }
-// TODO: controllare che l'HTML nei commenti non sia distruttivo
 function updateComment(id) {
   const commentContent = document.getElementById(`${id}-comment`);
   const editContent = document.getElementById(`${id}-comment-edit`);
   findComment(id).content = editContent.value;
-  commentContent.innerHTML = addMentionsToText(editContent.value);
+  commentContent.innerHTML = processText(editContent.value);
 }
