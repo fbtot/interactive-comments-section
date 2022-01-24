@@ -361,7 +361,7 @@ function deleteComment() {
 
       swal('Delete Comment', 'Are you sure you want to delete this comment? This will remove the comment and can\'t be undine.', {
         dangerMode: true,
-        buttons: true,
+        buttons: ['No, cancel', 'Yes, delete'],
       }).then((willDelete) => {
         if (willDelete) deleteAction(btn);
       });
