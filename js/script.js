@@ -36,6 +36,8 @@ function addJSONtoLocalStorage() {
       localStorageComments = jsonFromLocalStorage.comments;
       displayComments();
       commentPoints();
+      deleteComment();
+      editComment();
     });
 }
 
@@ -47,6 +49,8 @@ if (!localStorage.getItem(localStorageCommentsName)) {
   localStorageComments = jsonFromLocalStorage.comments;
   displayComments();
   commentPoints();
+  deleteComment();
+  editComment();
 }
 
 function updateLocalStorage() {
@@ -381,8 +385,6 @@ function deleteAction(el) {
   updateLocalStorage();
 }
 
-deleteComment();
-
 function editComment() {
   Array.from(editBtn).forEach((btn) => {
     btn.addEventListener('click', (e) => {
@@ -395,8 +397,6 @@ function editComment() {
     });
   });
 }
-
-editComment();
 
 function createEdit(id) {
   return `<form method="get" id="${id}-edit-form" class="form comment__edit-comment">
