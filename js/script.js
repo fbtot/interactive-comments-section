@@ -238,6 +238,7 @@ function removeVotefromUser(id) {
   delete localStorageCurrentUser.votes[id];
 }
 
+// eslint-disable-next-line consistent-return
 function checkUserVoted(id, kindOfVote) {
   if (localStorageCurrentUser.votes) {
     return localStorageCurrentUser.votes[id] === kindOfVote;
@@ -376,7 +377,6 @@ function editComment() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
       const id = thisCommentID(btn);
-      const commentJSON = findComment(id);
       const comment = thisComment(btn);
       comment.classList.add('edit-comment');
       insertEdit(id);
