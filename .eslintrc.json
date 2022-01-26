@@ -12,5 +12,9 @@
     },
     "rules": {
         "no-use-before-define": ["error", {"functions": false}]
+    },
+    "globals": {
+        "swal": "readonly",
+        "uuidv4": "readonly"
     }
 }
