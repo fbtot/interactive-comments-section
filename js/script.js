@@ -484,9 +484,11 @@ function sendReply(id) {
   const repliesContainer = document.getElementById(`${idParent}-replies-container`);
   const replyTextarea = document.getElementById(`${id}-reply-edit`);
   const replyContent = replyTextarea.value;
-  findComment(idParent).replies
-    .push(generateNewCommentInJSON(replyContent, findComment(id).user.username));
-  repliesContainer.insertAdjacentHTML('beforeend', createComment(findComment(idParent).replies.at(-1)));
+  const commentReplies = findComment(idParent).replies;
+  commentReplies.push(generateNewCommentInJSON(replyContent, findComment(id).user.username));
+  repliesContainer.insertAdjacentHTML('beforeend', createComment(commentReplies.at(-1)));
+  editComment();
+  deleteComment();
 }
 
 function retrieveIDParent(id) {
