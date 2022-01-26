@@ -262,9 +262,7 @@ function removeVotedClass(id, kindOfVote) {
   document.getElementById(`${id}-${kindOfVote}`).classList.remove('voted');
 }
 
-// eslint-disable-next-line
 function newID() {
-  // eslint-disable-next-line no-undef
   return `comment-${uuidv4().substring(0, 8)}`;
 }
 
@@ -372,7 +370,6 @@ function deleteComment() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 
-      // eslint-disable-next-line no-undef
       swal('Delete Comment', 'Are you sure you want to delete this comment? This will remove the comment and can\'t be undine.', {
         dangerMode: true,
         buttons: ['No, cancel', 'Yes, delete'],
