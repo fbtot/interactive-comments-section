@@ -320,6 +320,7 @@ Array.from(replyForms).forEach((el) => {
     commentPoints();
     editComment();
     deleteComment();
+    reply();
     replyElement.value = '';
   });
 });
