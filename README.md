@@ -21,8 +21,7 @@ Users should be able to:
 
 ### Links
 
-- Solution URL: [Add solution URL here](https://your-solution-url.com)
-- Live Site URL: [Add live site URL here](https://your-live-site-url.com)
+- Solution URL: [Solution](https://www.frontendmentor.io/solutions/interactive-comment-section-with-bouncing-animation-9yeSMNFnN)
 
 ## My process
 
@@ -49,3 +48,7 @@ Users should be able to:
 ## Author
 
 - Frontend Mentor - [@Filippo-B](https://www.frontendmentor.io/profile/Filippo-B)
+
+Interactive comment section
+
+Hi everyone! Any feedback is appreciated.
