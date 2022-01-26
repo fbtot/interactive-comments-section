@@ -570,6 +570,10 @@ textarea {
   font-weight: 700;
 }
 
+.icon-text {
+  align-items: center;
+}
+
 .icon-text__icon {
   margin-right: 0.3rem;
 }

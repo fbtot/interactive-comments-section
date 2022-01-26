@@ -1,5 +1,9 @@
 @use "../index.scss" as *;
 
+.icon-text {
+  align-items: center;
+}
+
 .icon-text__icon {
   margin-right: 0.3rem;
 }
