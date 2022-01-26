@@ -465,6 +465,8 @@ function reply() {
           submitEvent.preventDefault();
           toggleRepliesContainer(id, comment);
           sendReply(id);
+          document.getElementById(`${id}-reply-container`).remove();
+          updateLocalStorage();
         });
       }
     });
@@ -481,6 +483,23 @@ function toggleReplyContainer(id, comment) {
 
 function sendReply(id) {
   const idParent = retrieveIDParent(id);
+  const repliesContainer = document.getElementById(`${idParent}-replies-container`);
+  const replyTextarea = document.getElementById(`${id}-reply-edit`);
+  const replyContent = replyTextarea.value;
+  findComment(idParent).replies
+    .push(generateNewCommentInJSON(replyContent, findComment(id).user.username));
+  repliesContainer.insertAdjacentHTML('beforeend', createComment(findComment(idParent).replies.at(-1)));
+
+  /**
+   * Add to JSON
+   *  find id comment
+   *  push new comment into replies
+   * Add HTML
+   * Update localstorage
+   * delete replyform
+   */
+
+  console.log(replyContent);
 }
 
 function retrieveIDParent(id) {
@@ -502,9 +521,10 @@ function checkIsReply(id) {
 
 function toggleRepliesContainer(id, comment) {
   const element = document.getElementById(`${id}-replies-container`);
-  if (!element) {
+  if (!element && !checkIsReply(id)) {
     comment.insertAdjacentHTML('afterEnd', createRepliesContainer(id));
-  } if (element.childNodes.length === 0) {
+  }
+  if (element && element.childNodes.length === 0) {
     removeRepliesContainer(id);
   }
 }
