@@ -465,6 +465,8 @@ function reply() {
           sendReply(id);
           document.getElementById(`${id}-reply-container`).remove();
           updateLocalStorage();
+          editComment();
+          deleteComment();
         });
       }
     });
@@ -491,11 +493,9 @@ function sendReply(id) {
   const createdCommentID = commentReplies.at(-1).id;
   const createdComment = document.getElementById(createdCommentID);
   addAnimation(createdComment);
-  // createdComment.scrollIntoView();
+  scrollIntoView(createdComment);
 
   // TODO: Spostare in repoy
-  editComment();
-  deleteComment();
 }
 
 function retrieveIDParent(id) {
@@ -550,4 +550,10 @@ function createReply(id) {
 function addAnimation(el, animationName = 'animate__bounce') {
   el.classList.add('animate__animated', animationName);
   setTimeout(() => el.classList.remove('animate__animated', animationName), 1000);
+}
+
+function scrollIntoView(el) {
+  if (el.getBoundingClientRect().bottom > window.innerHeight) {
+    el.scrollIntoView({ block: 'end' });
+  }
 }
