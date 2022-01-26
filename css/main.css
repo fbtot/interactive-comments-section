@@ -398,13 +398,22 @@ textarea {
 /* ============================================ */
 /* ··········································· § STYLES ··· */
 /* ======================================== */
-.comment__edit-comment textarea:focus,
+.comment__edit-comment textarea {
+  min-height: 10rem;
+}
+@media screen and (max-width: 378px) {
+  .comment__edit-comment textarea {
+    /* mixin mq */
+    min-height: 25rem;
+    /* end mixin mq */
+  }
+}
+
 .reply__text:focus {
   min-height: 10rem;
 }
 @media screen and (max-width: 378px) {
-  .comment__edit-comment textarea:focus,
-.reply__text:focus {
+  .reply__text:focus {
     /* mixin mq */
     min-height: 25rem;
     /* end mixin mq */

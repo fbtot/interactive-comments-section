@@ -149,7 +149,12 @@
 /* ··········································· § STYLES ··· */
 /* ======================================== */
 
-.comment__edit-comment textarea,
+.comment__edit-comment textarea {
+  min-height: 10rem;
+  @include mq($small-size, down) {
+    min-height: 25rem;
+  }
+}
 .reply__text {
   &:focus {
     min-height: 10rem;
