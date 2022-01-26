@@ -25,7 +25,7 @@
     grid-template-areas:
       "points header action"
       "points comment comment";
-    grid-gap: 1.5rem;
+    grid-gap: 1rem 1.5rem;
   }
 
   @include mq($small-size, down) {
@@ -151,10 +151,11 @@
 
 .comment__edit-comment textarea,
 .reply__text {
-  min-height: 10rem;
-
-  @include mq($small-size, down) {
-    min-height: 25rem;
+  &:focus {
+    min-height: 10rem;
+    @include mq($small-size, down) {
+      min-height: 25rem;
+    }
   }
 }
 .comment__meta {
@@ -181,6 +182,7 @@
 
 .comment__author {
   color: var(--dark-blue);
+  font-weight: 500;
 }
 
 .comment__current-user-tag {
@@ -197,7 +199,7 @@
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-weight: 700;
+  font-weight: 500;
 
   > * + * {
     margin-left: 1rem;

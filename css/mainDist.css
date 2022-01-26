@@ -53,6 +53,10 @@ html {
 }
 
 body {
+  /* @mixin antialias */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  /* end @mixin antialias */
   min-width: 100vw;
   min-height: 100vh;
   line-height: 1.5em;
@@ -222,6 +226,7 @@ textarea {
   border: none;
   text-transform: uppercase;
   transition: var(--transition);
+  font-weight: 500;
 }
 
 .blue-button {
@@ -268,7 +273,7 @@ textarea {
     grid-template-columns: 2.5em auto auto;
     grid-template-rows: auto;
     grid-template-areas: "points header action" "points comment comment";
-    grid-gap: 1.5rem;
+    grid-gap: 1rem 1.5rem;
     /* end mixin mq */
   }
 }
@@ -394,13 +399,13 @@ textarea {
 /* ============================================ */
 /* ··········································· § STYLES ··· */
 /* ======================================== */
-.comment__edit-comment textarea,
-.reply__text {
+.comment__edit-comment textarea:focus,
+.reply__text:focus {
   min-height: 10rem;
 }
 @media screen and (max-width: 378px) {
-  .comment__edit-comment textarea,
-.reply__text {
+  .comment__edit-comment textarea:focus,
+.reply__text:focus {
     /* mixin mq */
     min-height: 25rem;
     /* end mixin mq */
@@ -436,6 +441,7 @@ textarea {
 
 .comment__author {
   color: var(--dark-blue);
+  font-weight: 500;
 }
 
 .comment__current-user-tag {
@@ -454,7 +460,7 @@ textarea {
   display: flex;
   justify-content: flex-end;
   align-items: center;
-  font-weight: 700;
+  font-weight: 500;
 }
 .comment__action > * + * {
   margin-left: 1rem;

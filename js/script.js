@@ -108,7 +108,7 @@ function createComment(index) {
   const commentHTML = `<div id="${commentID}" data-id="${commentID}" data-replying-to="${index.replyingTo ? index.replyingTo : ''}" class="comment-container basic-container ${deletedCommentClass(checkDeleted())} ${currentUserClass(checkCurrentUser())}">
               <div class="comment__meta">
                 <img src="${index.user.image.png}" alt="${index.user.username} avatar" class="comment__avatar" />
-                <a href="#" class="comment__author"><b>${index.user.username}</b></a>
+                <a href="#" class="comment__author">${index.user.username}</a>
                 <span class="comment__current-user-tag tag tag--blue">you</span>
               <span class="comment__date">${createdAt(index.createdAt)}</span>
               </div>
