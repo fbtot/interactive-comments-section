@@ -72,8 +72,8 @@ function findComment(id) {
   localStorageComments.forEach((comm) => {
     if (comm.id === id) foundComment = comm;
     else {
-      comm.replies.forEach((reply) => {
-        if (reply.id === id) foundComment = reply;
+      comm.replies.forEach((currentReply) => {
+        if (currentReply.id === id) foundComment = currentReply;
       });
     }
   });
@@ -159,7 +159,7 @@ function createReplies(parentComment) {
   return `<div class="replies-container" id="${parentComment.id}-replies-container" data-id-parent="${parentComment.id}">
     ${parentComment.replies
     .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
-    .map((reply) => createComment(reply)).join('')}
+    .map((currentReply) => createComment(currentReply)).join('')}
     </div>`;
 }
 
@@ -372,6 +372,7 @@ function deleteComment() {
     btn.addEventListener('click', (e) => {
       e.preventDefault();
 
+      // eslint-disable-next-line no-undef
       swal('Delete Comment', 'Are you sure you want to delete this comment? This will remove the comment and can\'t be undine.', {
         dangerMode: true,
         buttons: ['No, cancel', 'Yes, delete'],
@@ -489,17 +490,6 @@ function sendReply(id) {
   findComment(idParent).replies
     .push(generateNewCommentInJSON(replyContent, findComment(id).user.username));
   repliesContainer.insertAdjacentHTML('beforeend', createComment(findComment(idParent).replies.at(-1)));
-
-  /**
-   * Add to JSON
-   *  find id comment
-   *  push new comment into replies
-   * Add HTML
-   * Update localstorage
-   * delete replyform
-   */
-
-  console.log(replyContent);
 }
 
 function retrieveIDParent(id) {
