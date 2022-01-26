@@ -533,7 +533,7 @@ function toggleRepliesContainer(id, comment) {
 }
 
 function createRepliesContainer(id) {
-  return `<div class="replies-container" id="${id}-replies-container" data-id-parent="${id}"><p>REplies Container</p></div>`;
+  return `<div class="replies-container" id="${id}-replies-container" data-id-parent="${id}"></div>`;
 }
 
 function removeRepliesContainer(id) {
