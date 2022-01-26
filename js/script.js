@@ -541,7 +541,7 @@ function createReply(id) {
   return `
           <div id="${id}-reply-container" class="reply-container basic-container">
             <form action="get" class="reply form" id="${id}-reply-form">
-              <textarea placeholder="Add a reply…" name="Comment-reply" id="${id}-reply-edit" class="reply__text"></textarea>
+              <textarea required placeholder="Add a reply…" name="Comment-reply" id="${id}-reply-edit" class="reply__text"></textarea>
               <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
               <div class="reply__button-container">
                 <button id="${id}-send-reply" class="reply__button blue-button">Send</button>
