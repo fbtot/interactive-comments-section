@@ -60,6 +60,8 @@ body {
   color: var(--text-color);
   background-color: var(--very-light-grey);
   width: 100%;
+  align-items: center;
+  display: flex;
 }
 
 /* ========================== § TYPOGRAPHY === */
@@ -240,6 +242,10 @@ textarea {
 /* ============================================ */
 /* ··········································· § COMMENTS LAYOUT ··· */
 /* ======================================== */
+.comments-container {
+  padding: 1rem;
+}
+
 .comment-container,
 .reply-container {
   margin-bottom: 1rem;
