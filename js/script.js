@@ -485,8 +485,15 @@ function sendReply(id) {
   const replyTextarea = document.getElementById(`${id}-reply-edit`);
   const replyContent = replyTextarea.value;
   const commentReplies = findComment(idParent).replies;
+
   commentReplies.push(generateNewCommentInJSON(replyContent, findComment(id).user.username));
   repliesContainer.insertAdjacentHTML('beforeend', createComment(commentReplies.at(-1)));
+  const createdCommentID = commentReplies.at(-1).id;
+  const createdComment = document.getElementById(createdCommentID);
+  addAnimation(createdComment);
+  // createdComment.scrollIntoView();
+
+  // TODO: Spostare in repoy
   editComment();
   deleteComment();
 }
@@ -538,4 +545,9 @@ function createReply(id) {
             </form>
             </div>
   `;
+}
+
+function addAnimation(el, animationName = 'animate__bounce') {
+  el.classList.add('animate__animated', animationName);
+  setTimeout(() => el.classList.remove('animate__animated', animationName), 1000);
 }
