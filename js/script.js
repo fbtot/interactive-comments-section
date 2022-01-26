@@ -419,7 +419,9 @@ function createEdit(id) {
 function insertEdit(id) {
   const commentContent = document.getElementById(`${id}-comment`);
   commentContent.insertAdjacentHTML('afterend', createEdit(id));
-  document.getElementById(`${id}-comment-edit`).innerText = commentContent.innerText;
+  const textarea = document.getElementById(`${id}-comment-edit`);
+  textarea.innerText = commentContent.innerText;
+  textarea.focus();
 }
 
 function cancelEdit(id) {
@@ -458,7 +460,10 @@ function reply() {
       const { id } = comment;
 
       toggleReplyContainer(id, comment);
+      const textarea = document.getElementById(`${id}-reply-edit`);
       const replyForm = document.getElementById(`${id}-reply-form`);
+
+      textarea.focus();
 
       if (replyForm) {
         replyForm.addEventListener('submit', (submitEvent) => {
