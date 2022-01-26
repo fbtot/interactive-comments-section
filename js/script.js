@@ -39,6 +39,7 @@ function addJSONtoLocalStorage() {
       commentPoints();
       deleteComment();
       editComment();
+      reply();
     });
 }
 
@@ -52,6 +53,7 @@ if (!localStorage.getItem(localStorageCommentsName)) {
   commentPoints();
   deleteComment();
   editComment();
+  reply();
 }
 
 function updateLocalStorage() {
@@ -154,7 +156,7 @@ function votedClass(id, kindOfVote) {
 }
 
 function createReplies(parentComment) {
-  return `<div class="replies-container" data-id-parent="${parentComment.id}">
+  return `<div class="replies-container" id="${parentComment.id}-replies-container" data-id-parent="${parentComment.id}">
     ${parentComment.replies
     .sort((reply1, reply2) => reply1.createdAt - reply2.createdAt)
     .map((reply) => createComment(reply)).join('')}
@@ -322,9 +324,13 @@ Array.from(replyForms).forEach((el) => {
   });
 });
 
-function addNewCommentToJSON(content) {
-  const comment = generateNewCommentInJSON(content);
-  localStorageComments.push(comment);
+function addNewCommentToJSON(content, userReply = null, idAnsweringComment = false) {
+  const comment = generateNewCommentInJSON(content, userReply);
+  if (idAnsweringComment) {
+    findComment(idAnsweringComment).replies.push(comment);
+  } else {
+    localStorageComments.push(comment);
+  }
 }
 
 function generateNewCommentInJSON(content, userReply = null) {
@@ -446,38 +452,81 @@ function updateComment(id) {
 
 function reply() {
   Array.from(replyBtn).forEach((btn) => {
-    btn.addEventListener('click', (e) => {
-      e.preventDefault();
-      const id = thisCommentID(btn);
+    btn.addEventListener('click', (clickReplyEvent) => {
+      clickReplyEvent.preventDefault();
       const comment = thisComment(btn);
+      const { id } = comment;
 
-      comment.insertAdjacentHTML('afterend', createReply(id));
-      sendReply(id);
+      toggleReplyContainer(id, comment);
+      const replyForm = document.getElementById(`${id}-reply-form`);
+
+      if (replyForm) {
+        replyForm.addEventListener('submit', (submitEvent) => {
+          submitEvent.preventDefault();
+          toggleRepliesContainer(id, comment);
+          sendReply(id);
+        });
+      }
     });
   });
 }
 
-function sendReply(id) {
-  document.getElementById(`${id}-comment-form`).addEventListener('submit', (e) => {
-    e.preventDefault();
-    console.log('send');
-  });
+function toggleReplyContainer(id, comment) {
+  if (!checkElementbyID(`${id}-reply-container`)) {
+    comment.insertAdjacentHTML('afterend', createReply(id));
+  } else {
+    document.getElementById(`${id}-reply-container`).remove();
+  }
 }
-reply();
 
-function checkIsReply(el) {
-  return !!thisComment(el).getAttribute('replying-to');
+function sendReply(id) {
+  const idParent = retrieveIDParent(id);
+}
+
+function retrieveIDParent(id) {
+  const element = document.getElementById(id);
+  if (findComment(id).replyingTo !== undefined) {
+    return element.closest('.replies-container').getAttribute('data-id-parent');
+  }
+  return id;
+}
+
+function checkElementbyID(id) {
+  return !!document.getElementById(id);
+}
+
+function checkIsReply(id) {
+  const element = document.getElementById(id);
+  return !!thisComment(element).getAttribute('data-replying-to');
+}
+
+function toggleRepliesContainer(id, comment) {
+  const element = document.getElementById(`${id}-replies-container`);
+  if (!element) {
+    comment.insertAdjacentHTML('afterEnd', createRepliesContainer(id));
+  } if (element.childNodes.length === 0) {
+    removeRepliesContainer(id);
+  }
+}
+
+function createRepliesContainer(id) {
+  return `<div class="replies-container" id="${id}-replies-container" data-id-parent="${id}"><p>REplies Container</p></div>`;
+}
+
+function removeRepliesContainer(id) {
+  document.getElementById(`${id}-replies-container`).remove();
 }
 
 function createReply(id) {
   return `
-          <div class="reply-container basic-container">
-            <form action="get" class="reply form" id="${id}-comment-form">
-              <textarea placeholder="Add a reply…" name="Comment-reply" id="comment-reply ${id}-reply-edit" class="reply__text"></textarea>
+          <div id="${id}-reply-container" class="reply-container basic-container">
+            <form action="get" class="reply form" id="${id}-reply-form">
+              <textarea placeholder="Add a reply…" name="Comment-reply" id="${id}-reply-edit" class="reply__text"></textarea>
               <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
               <div class="reply__button-container">
-                <button id="sendBtn ${id}-send-reply" class="reply__button blue-button">Send</button>
+                <button id="${id}-send-reply" class="reply__button blue-button">Send</button>
               </div>
             </form>
+            </div>
   `;
 }
