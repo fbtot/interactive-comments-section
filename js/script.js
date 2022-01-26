@@ -313,7 +313,9 @@ Array.from(replyForms).forEach((el) => {
     addNewCommentToJSON(replyElement.value.trim());
     commentsContainer
       .innerHTML += createComment(localStorageComments[localStorageComments.length - 1]);
+    const commentCreated = document.getElementById(localStorageComments.at(-1).id);
 
+    addAnimation(commentCreated);
     updateLocalStorage();
     commentPoints();
     editComment();
