@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- FONTS -->
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,400;0,500;0,700;1,400;1,500;1,700&display=swap" rel="stylesheet" />
+    <link href="https://unpkg.com/boxicons@2.1.1/css/boxicons.min.css" rel="stylesheet" />
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <!-- STYLES -->
+    <link rel="stylesheet" href="./css/normalize.css" />
+    <link rel="stylesheet" href="./css/main.css" />
+    <title>Interactive comment section</title>
+  </head>
+  <body>
+    <div class="page-container">
+      <!-- ============================================ -->
+      <!-- ··········································· § COMMENTS ··· -->
+      <!-- ======================================== -->
+      <h1 class="sr-only">Comments</h1>
+      <main id="commentsContainer" class="comments-container">
+        <h3>static</h3>
+        <!-- =================================== § COMMENT 1 === -->
+        <div class="comment-container basic-container">
+          <div class="comment__meta">
+            <img src="./images/avatars/image-amyrobson.png" alt="amyrobson avatar" class="comment__avatar" />
+            <a href="#" class="comment__author"><b>amyrobson</b></a>
+            <span class="comment__current-user-tag tag tag--blue">you</span>
+            <span class="comment__date">1 month ago</span>
+          </div>
+          <div class="comment__comment">
+            Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.
+          </div>
+          <div class="counter-container comment__counter-container">
+            <div class="comment__points counter">
+              <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+              <span class="comment__points__count counter__count"><b>12</b></span>
+              <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+            </div>
+          </div>
+          <div class="comment__action">
+            <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+            <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+            <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+          </div>
+        </div>
+
+        <div class="comment-container basic-container comment-deleted">
+          <p class="comment__deleted-message">This comment has been deleted by the user.</p>
+        </div>
+        <!-- =================================== § COMMENT 2 === -->
+        <div class="comment-container basic-container">
+          <div class="comment__meta">
+            <img src="./images/avatars/image-maxblagun.png" alt="maxblagun avatar" class="comment__avatar" />
+            <a href="#" class="comment__author"><b>maxblagun</b></a>
+            <span class="comment__current-user-tag tag tag--blue">you</span>
+            <span class="comment__date">1 week ago</span>
+          </div>
+          <div class="comment__comment">
+            Woah, your project looks awesome! How long have you been coding for? I'm still new, but think I want to dive into React as well soon. Perhaps you can give me an insight on where I can
+            learn React? Thanks!
+          </div>
+          <div class="counter-container comment__counter-container">
+            <div class="comment__points counter">
+              <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+              <span class="comment__points__count counter__count"><b>5</b></span>
+              <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+            </div>
+          </div>
+          <div class="comment__action">
+            <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+            <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+            <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+          </div>
+        </div>
+        <div class="replies-container">
+          <!-- =================================== § COMMENT 2.2 === -->
+          <div class="comment-container basic-container">
+            <div class="comment__meta">
+              <img src="./images/avatars/image-ramsesmiron.png" alt="ramsesmiron avatar" class="comment__avatar" />
+              <a href="#" class="comment__author"><b>ramsesmiron</b></a>
+              <span class="comment__current-user-tag tag tag--blue">you</span>
+              <span class="comment__date">1 month ago</span>
+            </div>
+            <div class="comment__comment">
+              <a class="comment__user-mention" href="#">@maxblagun</a> If you're still new, I'd recommend focusing on the fundamentals of HTML, CSS, and JS before considering React. It's very tempting
+              to jump ahead but lay a solid foundation first.
+            </div>
+            <div class="counter-container comment__counter-container">
+              <div class="comment__points counter">
+                <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+                <span class="comment__points__count counter__count"><b>4</b></span>
+                <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+              </div>
+            </div>
+            <div class="comment__action">
+              <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+              <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+              <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+            </div>
+          </div>
+          <!-- =================================== § COMMENT 2.2 === -->
+          <div class="comment-container basic-container current-user">
+            <div class="comment__meta">
+              <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="comment__avatar" />
+              <a href="#" class="comment__author"><b>juliusomo</b></a>
+              <span class="comment__current-user-tag tag tag--blue">you</span>
+              <span class="comment__date">1 month ago</span>
+            </div>
+            <div class="comment__comment">
+              <a class="comment__user-mention" href="#">@ramsesmiron </a>I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework.
+              But the fundamentals are what stay constant.
+            </div>
+            <div class="counter-container comment__counter-container comment__counter-container comment__counter-container">
+              <div class="comment__points counter">
+                <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+                <span class="comment__points__count counter__count"><b>2</b></span>
+                <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+              </div>
+            </div>
+            <div class="comment__action">
+              <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+              <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+              <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+            </div>
+            <!-- =================================== § EDOT TEST === -->
+          </div>
+          <div class="edit-comment comment-container basic-container current-user">
+            <div class="comment__meta">
+              <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="comment__avatar" />
+              <a href="#" class="comment__author"><b>juliusomo</b></a>
+              <span class="comment__current-user-tag tag tag--blue">you</span>
+              <span class="comment__date">1 month ago</span>
+            </div>
+            <div class="comment__comment">
+              <a class="comment__user-mention" href="#">@ramsesmiron </a>I couldn't agree more with this. Everything moves so fast and it always seems like everyone knows the newest library/framework.
+              But the fundamentals are what stay constant.
+            </div>
+            <form action="" class="form comment__edit-comment">
+              <textarea validate placeholder="Write your reply..."> </textarea>
+              <div class="comment__edit-buttons">
+                <button class="comment__edit-cancel red-button">Cancel</button>
+                <button class="comment__edit-update blue-button">Update</button>
+              </div>
+            </form>
+            <div class="counter-container comment__counter-container">
+              <div class="comment__points counter">
+                <a href="#" aria-label="upvote" class="counter__plus comment__points__upvote"><i class="bx bx-plus"></i></a>
+                <span class="comment__points__count counter__count"><b>2</b></span>
+                <a href="#" aria-label="downvote" class="counter__minus comment__points__downvote"><i class="bx bx-minus"></i></a>
+              </div>
+            </div>
+            <div class="comment__action">
+              <a href="#" class="icon-text comment__reply"><i class="icon-text__icon bx bxs-share"></i><span>Reply</span></a>
+              <a href="#" class="icon-text comment__delete"><i class="icon-text__icon bx bxs-trash-alt"></i><span>Delete</span></a>
+              <a href="#" class="icon-text comment__edit"><i class="icon-text__icon bx bxs-pencil"></i><span>Edit</span></a>
+            </div>
+          </div>
+          <!-- =================================== § REPLY === -->
+          <div class="reply-container basic-container">
+            <form action="get" class="reply form">
+              <textarea placeholder="Add a comment…" name="Comment-reply" id="comment-reply" class="reply__text"></textarea>
+              <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
+              <div class="reply__button-container">
+                <button id="sendBtn" class="reply__button blue-button">Send</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+      <!-- ============================================ -->
+      <!-- ··········································· § REPLY ··· -->
+      <!-- ======================================== -->
+      <div class="reply-container basic-container">
+        <form method="get" class="reply form">
+          <textarea required placeholder="Add a comment…" name="Comment-reply" id="comment-reply-text" class="reply__text"></textarea>
+          <img src="./images/avatars/image-juliusomo.png" alt="juliusomo avatar" class="reply__avatar" />
+          <div class="reply__button-container">
+            <button id="sendBtn" class="reply__button blue-button">Send</button>
+          </div>
+        </form>
+      </div>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/uuid/8.1.0/uuidv4.min.js"></script>
+      <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+      <script src="./js/script.js"></script>
+    </div>
+  </body>
+</html>
